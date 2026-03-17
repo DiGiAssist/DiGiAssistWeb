@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DiGiAssist — Software a medida, automatizaciones con IA y productos digitales. Córdoba, Argentina.">
+  <link rel="canonical" href="https://digiassist.com.ar/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DiGiAssist — Tecnología que trabaja por vos">
+  <meta property="og:description" content="Software a medida, automatizaciones con n8n e IA, y productos listos para tu empresa.">
+  <title>DiGiAssist – Software · IA · Automatización</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <!-- Geist via CDN -->
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/geist');
+  </style>
+
+  <style>
+    :root {
+      --bg:        #090e1a;
+      --bg2:       #0d1525;
+      --bg3:       #111d30;
+      --teal:      #0fb4a7;
+      --teal2:     #1dd6c8;
+      --teal-dim:  rgba(15,180,167,.1);
+      --teal-glow: rgba(15,180,167,.22);
+      --text:      #e8edf5;
+      --muted:     #8a94a8;
+      --border:    rgba(15,180,167,.13);
+      --nav-h:     68px;
+      --r:         14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding-top: var(--nav-h);
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    h1,h2,h3,h4 { font-family: 'Geist', 'DM Sans', sans-serif; letter-spacing: -.03em; }
+    section[id] { scroll-margin-top: calc(var(--nav-h) + 16px); }
+
+    /* LIGHT THEME */
+    body.light {
+      --bg: #f2f6fb;
+      --bg2: #ffffff;
+      --bg3: #e8eff8;
+      --text: #0a0f1e;
+      --muted: #526075;
+      --border: rgba(15,180,167,.2);
+      --teal-dim: rgba(15,180,167,.08);
+    }
+    body.light .navbar { background: rgba(242,246,251,.88); }
+    body.light .hero-orb { opacity: .1; }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: fixed; top:0; left:0; right:0; z-index:100;
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+      background: rgba(9,14,26,.78);
+      backdrop-filter: blur(14px) saturate(1.5);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand {
+      display: flex; align-items: center; gap: .55rem;
+      font-family: 'Geist', 'DM Sans', sans-serif; font-size: 1.3rem; font-weight: 700;
+      color: var(--teal); letter-spacing: -.02em;
+    }
+    .brand img { width: 32px; height: 32px; object-fit: contain; border-radius: 6px; }
+    nav { display: flex; gap: 1.6rem; align-items: center; }
+    nav a { font-size: .88rem; font-weight: 500; color: var(--muted); transition: color .2s; }
+    nav a:hover { color: var(--text); }
+    .nav-actions { display: flex; gap: .4rem; }
+    .btn-icon {
+      background: none; border: none; color: var(--muted);
+      font-size: 1rem; cursor: pointer; padding: .3rem .5rem;
+      border-radius: 8px; transition: color .2s, background .2s;
+    }
+    .btn-icon:hover { color: var(--text); background: var(--teal-dim); }
+    .nav-toggle { display:none; background:none; border:none; color:var(--text); font-size:1.3rem; cursor:pointer; }
+    @media(max-width:820px){
+      nav { position:absolute; top:100%; right:0; background:var(--bg2); flex-direction:column; width:220px; border:1px solid var(--border); padding:.6rem 0; display:none; gap:0; }
+      nav a { padding:.7rem 1.5rem; width:100%; }
+      nav.open { display:flex; }
+      .nav-toggle { display:block; }
+      .navbar { padding:0 1.2rem; }
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 6rem 1.5rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-orb {
+      position: absolute; border-radius:50%;
+      filter: blur(90px); opacity: .28; pointer-events:none;
+    }
+    .hero-orb-1 { width:700px; height:700px; background:radial-gradient(circle,#0fb4a7 0%,transparent 65%); top:-250px; left:-200px; animation:orb1 14s ease-in-out infinite; }
+    .hero-orb-2 { width:450px; height:450px; background:radial-gradient(circle,#1dd6c8 0%,transparent 65%); bottom:-120px; right:-120px; animation:orb2 17s ease-in-out infinite; }
+    @keyframes orb1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(70px,50px)} }
+    @keyframes orb2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-50px,-40px)} }
+    .hero-grid {
+      position:absolute; inset:0; pointer-events:none;
+      background-image: linear-gradient(rgba(15,180,167,.035) 1px,transparent 1px), linear-gradient(90deg,rgba(15,180,167,.035) 1px,transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 75% 75% at 50% 50%,black 20%,transparent 80%);
+    }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:.4rem;
+      background:var(--teal-dim); border:1px solid rgba(15,180,167,.28);
+      border-radius:999px; padding:.3rem .9rem;
+      font-size:.75rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+      color:var(--teal2); margin-bottom:1.5rem;
+    }
+    .badge-dot { width:6px; height:6px; border-radius:50%; background:var(--teal2); animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.5)} }
+    .hero h1 {
+      font-size: clamp(2.2rem, 4vw + .8rem, 4.2rem);
+      line-height: 1.1; font-weight:700; letter-spacing:-.04em; max-width:840px;
+    }
+    .hero h1 em {
+      font-style:normal;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .hero-sub { margin-top:1.2rem; font-size:clamp(1rem,1.8vw,.1rem); color:var(--muted); max-width:560px; line-height:1.7; font-size:1.05rem; }
+    .hero-btns { margin-top:2.25rem; display:flex; gap:.9rem; flex-wrap:wrap; justify-content:center; }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:.4rem;
+      padding:.78rem 1.65rem; border-radius:var(--r);
+      font-weight:600; font-size:.92rem; cursor:pointer;
+      transition:transform .2s, box-shadow .2s; border:none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal2) 100%);
+      color:var(--bg); box-shadow:0 0 22px var(--teal-glow);
+    }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 0 34px var(--teal-glow); }
+    .btn-outline {
+      background:transparent; border:1px solid rgba(15,180,167,.38); color:var(--teal2);
+    }
+    .btn-outline:hover { background:var(--teal-dim); transform:translateY(-2px); }
+
+    /* ===== STATS ===== */
+    .stats-bar {
+      background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+      padding:1.6rem 1.5rem;
+    }
+    .stats-inner { max-width:920px; margin:0 auto; display:flex; justify-content:space-around; flex-wrap:wrap; gap:1rem; }
+    .stat { text-align:center; }
+    .stat-num { font-family:'Geist','DM Sans',sans-serif; font-size:1.9rem; font-weight:700; color:var(--teal); line-height:1; }
+    .stat-label { font-size:.78rem; color:var(--muted); margin-top:.2rem; }
+
+    /* ===== SECTION BASE ===== */
+    .section { padding:5rem 1.5rem; }
+    .section-inner { max-width:1160px; margin:0 auto; }
+    .section-tag { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--teal); margin-bottom:.6rem; }
+    .section-title { font-size:clamp(1.8rem,3vw+.4rem,2.7rem); font-weight:800; line-height:1.1; letter-spacing:-.02em; margin-bottom:.9rem; }
+    .section-desc { color:var(--muted); max-width:540px; line-height:1.7; font-size:.93rem; }
+    .text-center { text-align:center; }
+    .text-center .section-desc { margin:0 auto; }
+
+    hr.divider { height:1px; background:var(--border); border:none; }
+
+    /* ===== CARDS ===== */
+    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1rem; margin-top:2.5rem; }
+    .card {
+      background:var(--bg2); border:1px solid var(--border); border-radius:var(--r);
+      padding:1.7rem 1.45rem; display:flex; flex-direction:column;
+      transition:transform .25s, box-shadow .25s, border-color .25s;
+      position:relative; overflow:hidden;
+    }
+    .card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--teal),var(--teal2)); opacity:0; transition:opacity .25s; }
+    .card:hover { transform:translateY(-4px); box-shadow:0 14px 44px rgba(0,0,0,.4); border-color:rgba(15,180,167,.28); }
+    .card:hover::before { opacity:1; }
+    .card-icon {
+      width:46px; height:46px; background:var(--teal-dim); border:1px solid rgba(15,180,167,.18); border-radius:12px;
+      display:flex; align-items:center; justify-content:center; margin-bottom:1rem; font-size:1.25rem;
+    }
+    .card-icon img { width:24px; height:24px; filter:invert(1) sepia(1) saturate(2) hue-rotate(155deg); }
+    .card h3 { font-size:1.05rem; font-weight:700; margin-bottom:.45rem; }
+    .card .card-desc { font-size:.85rem; color:var(--muted); line-height:1.6; margin-bottom:.7rem; }
+    .card ul { list-style:none; margin-bottom:.7rem; }
+    .card ul li { font-size:.82rem; color:var(--muted); padding:.18rem 0 .18rem 1rem; position:relative; }
+    .card ul li::before { content:'›'; position:absolute; left:0; color:var(--teal); font-weight:700; }
+    .card .price { margin-top:auto; padding-top:.7rem; border-top:1px solid var(--border); font-size:.85rem; color:var(--muted); }
+    .card .price strong { color:var(--teal2); }
+    .card-link { color:var(--teal2); font-size:.83rem; font-weight:600; display:inline-flex; align-items:center; gap:.25rem; margin-top:.7rem; transition:gap .2s; }
+    .card-link:hover { gap:.5rem; }
+
+    /* ===== PRODUCTS ===== */
+    .products-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:1.5rem; margin-top:2.5rem; }
+    .product-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; transition:transform .25s, box-shadow .25s; }
+    .product-card:hover { transform:translateY(-4px); box-shadow:0 16px 50px rgba(0,0,0,.45); }
+    .product-header { padding:1.4rem 1.5rem .9rem; background:linear-gradient(135deg,var(--bg3) 0%,var(--bg2) 100%); border-bottom:1px solid var(--border); display:flex; align-items:flex-start; gap:.9rem; }
+    .product-emoji { width:44px; height:44px; flex-shrink:0; background:var(--teal-dim); border:1px solid rgba(15,180,167,.22); border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; }
+    .product-header h3 { font-size:1.1rem; font-weight:700; margin-bottom:.2rem; }
+    .product-header p { font-size:.8rem; color:var(--muted); line-height:1.5; }
+    .product-body { padding:1.25rem 1.5rem; }
+    .product-features { list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:.3rem .5rem; }
+    .product-features li { font-size:.78rem; color:var(--muted); display:flex; align-items:center; gap:.3rem; }
+    .product-features li::before { content:'✓'; color:var(--teal); font-weight:700; flex-shrink:0; }
+    .product-badge { display:inline-block; background:var(--teal-dim); border:1px solid rgba(15,180,167,.28); border-radius:999px; padding:.18rem .7rem; font-size:.7rem; font-weight:700; color:var(--teal2); text-transform:uppercase; letter-spacing:.06em; margin-top:.9rem; }
+
+    /* ===== AUTOMATIONS ===== */
+    .auto-grid { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:start; margin-top:2.5rem; }
+    @media(max-width:768px){ .auto-grid { grid-template-columns:1fr; } }
+    .auto-items { display:flex; flex-direction:column; gap:.7rem; }
+    .auto-item { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r); padding:1rem 1.2rem; display:flex; align-items:flex-start; gap:.85rem; transition:border-color .2s, background .2s; }
+    .auto-item:hover { border-color:rgba(15,180,167,.32); background:var(--bg3); }
+    .auto-num { width:26px; height:26px; flex-shrink:0; border-radius:7px; background:linear-gradient(135deg,var(--teal),var(--teal2)); display:flex; align-items:center; justify-content:center; font-size:.7rem; font-weight:700; color:var(--bg); font-family:'Geist','DM Sans',sans-serif; }
+    .auto-item h4 { font-size:.92rem; font-weight:700; margin-bottom:.18rem; }
+    .auto-item p { font-size:.8rem; color:var(--muted); line-height:1.55; }
+    .n8n-visual { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r); padding:1.6rem; }
+    .n8n-title { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:1.1rem; }
+    .n8n-flow { display:flex; align-items:center; gap:.4rem; flex-wrap:wrap; margin-bottom:.6rem; }
+    .n8n-node { background:var(--bg3); border:1px solid var(--border); border-radius:9px; padding:.45rem .8rem; font-size:.75rem; font-weight:600; }
+    .n8n-node.hl { background:var(--teal-dim); border-color:rgba(15,180,167,.35); color:var(--teal2); }
+    .n8n-arr { color:var(--teal); font-size:.9rem; }
+    .n8n-note { margin-top:1.25rem; padding-top:1.25rem; border-top:1px solid var(--border); font-size:.8rem; color:var(--muted); line-height:1.6; }
+
+    /* ===== CASE STUDY ===== */
+    .case-study { background:var(--bg2); border:1px solid var(--border); border-radius:calc(var(--r)*1.4); overflow:hidden; margin-top:2.5rem; }
+    .case-header { background:linear-gradient(135deg,var(--bg3) 0%,rgba(15,180,167,.04) 100%); border-bottom:1px solid var(--border); padding:1.8rem 2.2rem; display:flex; align-items:center; gap:1.4rem; flex-wrap:wrap; }
+    .case-logo-box { width:56px; height:56px; background:var(--teal-dim); border:1px solid rgba(15,180,167,.22); border-radius:13px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; flex-shrink:0; }
+    .case-header h3 { font-size:1.3rem; font-weight:700; }
+    .case-header p { font-size:.85rem; color:var(--muted); margin-top:.2rem; }
+    .case-tag { margin-left:auto; background:rgba(15,180,167,.1); border:1px solid rgba(15,180,167,.28); border-radius:999px; padding:.25rem .9rem; font-size:.7rem; font-weight:700; color:var(--teal2); text-transform:uppercase; letter-spacing:.06em; }
+    .case-body { padding:1.8rem 2.2rem; display:grid; grid-template-columns:1fr 1fr 1fr; gap:1.25rem; }
+    @media(max-width:680px){ .case-body { grid-template-columns:1fr; } }
+    .case-metric { text-align:center; padding:1.4rem; background:var(--bg3); border:1px solid var(--border); border-radius:var(--r); }
+    .case-metric-num { font-family:'Geist','DM Sans',sans-serif,sans-serif; font-size:2rem; font-weight:800; color:var(--teal); }
+    .case-metric-label { font-size:.78rem; color:var(--muted); margin-top:.25rem; }
+    .case-quote { grid-column:1/-1; padding:1.4rem; background:var(--bg3); border-left:3px solid var(--teal); border-radius:0 var(--r) var(--r) 0; font-size:.9rem; color:var(--muted); font-style:italic; line-height:1.7; }
+    .case-quote cite { display:block; margin-top:.4rem; color:var(--teal2); font-style:normal; font-weight:600; font-size:.8rem; }
+
+    /* ===== STEPS ===== */
+    .steps-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1rem; margin-top:2.5rem; }
+    .step { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r); padding:1.6rem 1.4rem; }
+    .step-num { font-family:'Geist','DM Sans',sans-serif,sans-serif; font-size:2.8rem; font-weight:800; color:rgba(15,180,167,.1); line-height:1; margin-bottom:.6rem; }
+    .step h3 { font-size:1rem; font-weight:700; margin-bottom:.35rem; }
+    .step p { font-size:.82rem; color:var(--muted); line-height:1.6; }
+
+    /* ===== FAQ ===== */
+    .faq-list { max-width:740px; margin:2rem auto 0; }
+    details { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r); padding:1rem 1.2rem; margin-bottom:.5rem; transition:border-color .2s; }
+    details:hover { border-color:rgba(15,180,167,.28); }
+    details[open] { border-color:rgba(15,180,167,.38); }
+    summary { font-weight:600; cursor:pointer; list-style:none; font-size:.92rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+    summary::after { content:'+'; color:var(--teal); font-size:1.1rem; font-weight:700; transition:transform .2s; flex-shrink:0; }
+    details[open] summary::after { transform:rotate(45deg); }
+    summary::-webkit-details-marker { display:none; }
+    details[open] summary { color:var(--teal2); }
+    details p { margin-top:.65rem; font-size:.85rem; color:var(--muted); line-height:1.7; }
+
+    /* ===== CONTACT ===== */
+    .contact-grid { display:grid; grid-template-columns:1fr 1.1fr; gap:2.5rem; margin-top:2.5rem; align-items:start; }
+    @media(max-width:800px){ .contact-grid { grid-template-columns:1fr; } }
+    .contact-info { display:flex; flex-direction:column; gap:1.4rem; }
+    .contact-info h3 { font-size:1.5rem; font-weight:800; line-height:1.2; }
+    .contact-info p { color:var(--muted); font-size:.88rem; line-height:1.7; }
+    .contact-detail { display:flex; align-items:center; gap:.7rem; font-size:.85rem; color:var(--muted); }
+    .contact-detail-icon { width:34px; height:34px; flex-shrink:0; background:var(--teal-dim); border:1px solid rgba(15,180,167,.2); border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:.95rem; }
+    .contact-form-card { background:var(--bg2); border:1px solid var(--border); border-radius:calc(var(--r)*1.2); padding:1.8rem; }
+    .form-group { margin-bottom:.9rem; }
+    .form-group label { display:block; font-size:.78rem; font-weight:700; color:var(--text); margin-bottom:.35rem; }
+    .form-group input, .form-group textarea, .form-group select {
+      width:100%; padding:.7rem .95rem; background:var(--bg3); border:1px solid rgba(15,180,167,.18); border-radius:10px;
+      color:var(--text); font:inherit; font-size:.88rem; transition:border-color .2s, box-shadow .2s; resize:vertical;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(15,180,167,.11); }
+    .form-group textarea { min-height:115px; }
+    .form-group select option { background:var(--bg2); }
+    .form-msg { margin-top:.6rem; font-size:.84rem; color:var(--muted); }
+    .hp { position:absolute; left:-9999px; }
+
+    /* ===== CTA SECTION ===== */
+    .cta-section { text-align:center; padding:5rem 1.5rem; position:relative; overflow:hidden; }
+    .cta-section::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 55% 55% at 50% 50%,rgba(15,180,167,.07) 0%,transparent 70%); pointer-events:none; }
+    .cta-section h2 { font-size:clamp(1.8rem,3vw+.4rem,2.8rem); font-weight:800; margin-bottom:.9rem; }
+    .cta-section p { color:var(--muted); max-width:460px; margin:0 auto 1.8rem; line-height:1.7; font-size:.9rem; }
+
+    /* ===== FOOTER ===== */
+    footer { background:var(--bg2); border-top:1px solid var(--border); padding:2.2rem 1.5rem; }
+    .footer-inner { max-width:1160px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+    .footer-brand { font-family:'Geist','DM Sans',sans-serif,sans-serif; font-size:1.05rem; font-weight:800; color:var(--teal); }
+    .footer-copy { font-size:.78rem; color:var(--muted); }
+    .footer-links { display:flex; gap:1.25rem; }
+    .footer-links a { font-size:.8rem; color:var(--muted); transition:color .2s; }
+    .footer-links a:hover { color:var(--text); }
+
+    /* ===== FAB ===== */
+    .fab-wa { position:fixed; right:22px; bottom:22px; width:52px; height:52px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 22px rgba(37,211,102,.38); z-index:200; transition:transform .2s, box-shadow .2s; }
+    .fab-wa:hover { transform:translateY(-2px); box-shadow:0 12px 30px rgba(37,211,102,.5); }
+    .fab-wa svg { width:25px; height:25px; fill:#fff; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <a href="#" class="brand">
+      <img src="images/logo.png" alt="DiGiAssist">
+      DiGiAssist
+    </a>
+    <button class="nav-toggle" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
+    <nav id="nav">
+      <a href="#servicios" data-i18n="nav-servicios">Servicios</a>
+      <a href="#productos" data-i18n="nav-productos">Productos</a>
+      <a href="#automatizaciones" data-i18n="nav-automatizaciones">Automatizaciones</a>
+      <a href="#casos" data-i18n="nav-casos">Casos</a>
+      <a href="#faq" data-i18n="nav-faq">FAQ</a>
+      <a href="#contacto" data-i18n="nav-contacto">Contacto</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="btn-icon" onclick="toggleTheme()" id="themeBtn">🌙</button>
+      <button class="btn-icon" onclick="toggleLang()" id="langBtn">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-badge" data-i18n="hero-badge"><span class="badge-dot"></span> Córdoba, Argentina · Disponible 24/7</div>
+  <h1 data-i18n="hero-h1">Software inteligente que <em>trabaja</em><br>por tu empresa</h1>
+  <p class="hero-sub" data-i18n="hero-sub">Desarrollamos software a medida, automatizamos procesos con IA y n8n, y ofrecemos productos digitales listos para que tu negocio escale sin fricciones.</p>
+  <div class="hero-btns">
+    <a href="#contacto" class="btn btn-primary" data-i18n="hero-btn1">Hablemos →</a>
+    <a href="#productos" class="btn btn-outline" data-i18n="hero-btn2">Ver productos</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-num">3+</div><div class="stat-label" data-i18n="stat1-label">Productos en producción</div></div>
+    <div class="stat"><div class="stat-num">24/7</div><div class="stat-label" data-i18n="stat2-label">Disponibilidad</div></div>
+    <div class="stat"><div class="stat-num">n8n</div><div class="stat-label" data-i18n="stat3-label">Automatizaciones</div></div>
+    <div class="stat"><div class="stat-num">IA</div><div class="stat-label" data-i18n="stat4-label">Agentes conversacionales</div></div>
+  </div>
+</div>
+
+<!-- SERVICIOS -->
+<section class="section" id="servicios">
+  <div class="section-inner">
+    <div class="section-tag" data-i18n="servicios-tag">Lo que hacemos</div>
+    <h2 class="section-title" data-i18n="servicios-title">Tres pilares, un solo proveedor</h2>
+    <p class="section-desc" data-i18n="servicios-desc">Del código a la automatización, cubrimos todo el stack tecnológico que tu empresa necesita.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">🖥️</div>
+        <h3 data-i18n="s1-title">Software a medida</h3>
+        <p class="card-desc" data-i18n="s1-desc">Aplicaciones web y sistemas de gestión construidos exactamente para tu proceso.</p>
+        <ul>
+          <li data-i18n="s1-li1">Gestión de ventas y stock</li>
+          <li data-i18n="s1-li2">Paneles administrativos</li>
+          <li data-i18n="s1-li3">Integración con sistemas existentes</li>
+          <li data-i18n="s1-li4">APIs y webhooks</li>
+        </ul>
+        <a href="#contacto" class="card-link" data-i18n="s1-link">Consultá tu proyecto →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤖</div>
+        <h3 data-i18n="s2-title">Agentes de IA</h3>
+        <p class="card-desc" data-i18n="s2-desc">Asistentes conversacionales para WhatsApp y web que automatizan atención y ventas.</p>
+        <ul>
+          <li data-i18n="s2-li1">Conexión vía webhook a WhatsApp</li>
+          <li data-i18n="s2-li2">Soporte, ventas y turnos 24/7</li>
+          <li data-i18n="s2-li3">Entrenados con tus datos</li>
+          <li data-i18n="s2-li4">Handoff a humano cuando hace falta</li>
+        </ul>
+        <a href="#contacto" class="card-link" data-i18n="s2-link">Ver agentes →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3 data-i18n="s3-title">Automatizaciones</h3>
+        <p class="card-desc" data-i18n="s3-desc">Flujos con n8n que conectan tus herramientas y eliminan tareas repetitivas.</p>
+        <ul>
+          <li data-i18n="s3-li1">Integración de apps y servicios</li>
+          <li data-i18n="s3-li2">Notificaciones y reportes automáticos</li>
+          <li data-i18n="s3-li3">Procesamiento en tiempo real</li>
+          <li data-i18n="s3-li4">Sin necesidad de programar</li>
+        </ul>
+        <a href="#automatizaciones" class="card-link" data-i18n="s3-link">Ver automatizaciones →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PRODUCTOS PROPIOS -->
+<section class="section" id="productos">
+  <div class="section-inner">
+    <div class="section-tag" data-i18n="productos-tag">Productos DiGiAssist</div>
+    <h2 class="section-title" data-i18n="productos-title">Listos para implementar</h2>
+    <p class="section-desc" data-i18n="productos-desc">Construidos, probados en producción y disponibles para licenciar o adaptar a tu empresa.</p>
+    <div class="products-grid">
+
+      <div class="product-card">
+        <div class="product-header">
+          <div class="product-emoji">🏪</div>
+          <div>
+            <h3>DGAStorePanel</h3>
+            <p data-i18n="p1-desc">ERP liviano para comercios: ventas, remitos, stock, métricas y usuarios en un solo sistema web.</p>
+          </div>
+        </div>
+        <div class="product-body">
+          <ul class="product-features">
+            <li data-i18n="p1-f1">Registrar ventas + remitos</li>
+            <li data-i18n="p1-f2">Control de stock en tiempo real</li>
+            <li data-i18n="p1-f3">Alertas de stock crítico</li>
+            <li data-i18n="p1-f4">Métricas: hoy / semana / mes</li>
+            <li data-i18n="p1-f5">Gráficos de evolución de ventas</li>
+            <li data-i18n="p1-f6">Gestión de usuarios y roles</li>
+            <li data-i18n="p1-f7">Historial y reportes</li>
+            <li data-i18n="p1-f8">Acceso web desde cualquier lugar</li>
+          </ul>
+          <div class="product-badge" data-i18n="p1-badge">⭐ Ideal para comercios y distribuidoras</div>
+          <div style="margin-top:1rem">
+            <a href="#contacto" class="btn btn-outline" style="font-size:.82rem;padding:.55rem 1.1rem" data-i18n="p-demo">Solicitar demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-header">
+          <div class="product-emoji">💬</div>
+          <div>
+            <h3>DGAChat</h3>
+            <p data-i18n="p2-desc">Plataforma de gestión de conversaciones WhatsApp para equipos. CRM conversacional propio.</p>
+          </div>
+        </div>
+        <div class="product-body">
+          <ul class="product-features">
+            <li data-i18n="p2-f1">Conexión por webhook</li>
+            <li data-i18n="p2-f2">Bandeja multiagente</li>
+            <li data-i18n="p2-f3">Asignación de chats</li>
+            <li data-i18n="p2-f4">Historial completo</li>
+            <li data-i18n="p2-f5">Etiquetas y estados</li>
+            <li data-i18n="p2-f6">Notas internas</li>
+            <li data-i18n="p2-f7">Respuestas rápidas</li>
+            <li data-i18n="p2-f8">Dashboard de métricas</li>
+          </ul>
+          <div class="product-badge" data-i18n="p2-badge">⭐ Ideal para organismos y empresas</div>
+          <div style="margin-top:1rem">
+            <a href="#contacto" class="btn btn-outline" style="font-size:.82rem;padding:.55rem 1.1rem" data-i18n="p-demo">Solicitar demo →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- AUTOMATIZACIONES -->
+<section class="section" id="automatizaciones">
+  <div class="section-inner">
+    <div class="section-tag" data-i18n="auto-tag">n8n · IA · Webhooks</div>
+    <h2 class="section-title" data-i18n="auto-title">Automatizamos lo que hoy hacés a mano</h2>
+    <p class="section-desc" data-i18n="auto-desc">Con n8n conectamos cualquier herramienta con cualquier otra. Sin código, con resultados reales.</p>
+    <div class="auto-grid">
+      <div class="auto-items">
+        <div class="auto-item"><div class="auto-num">01</div><div><h4 data-i18n="a1-title">Notificaciones automáticas</h4><p data-i18n="a1-desc">WhatsApp, email o Telegram cuando pasa algo importante en tu sistema.</p></div></div>
+        <div class="auto-item"><div class="auto-num">02</div><div><h4 data-i18n="a2-title">Sincronización de datos</h4><p data-i18n="a2-desc">Google Sheets, CRM, ERP o cualquier base conectados en tiempo real.</p></div></div>
+        <div class="auto-item"><div class="auto-num">03</div><div><h4 data-i18n="a3-title">Procesamiento de leads</h4><p data-i18n="a3-desc">Formularios → IA califica → CRM registra → WhatsApp notifica. Solo.</p></div></div>
+        <div class="auto-item"><div class="auto-num">04</div><div><h4 data-i18n="a4-title">Reportes programados</h4><p data-i18n="a4-desc">Informes automáticos diarios, semanales o mensuales sin intervención.</p></div></div>
+        <div class="auto-item"><div class="auto-num">05</div><div><h4 data-i18n="a5-title">Flujos de aprobación</h4><p data-i18n="a5-desc">Solicitudes, validaciones y notificaciones internas automatizadas.</p></div></div>
+      </div>
+      <div class="n8n-visual">
+        <div class="n8n-title" data-i18n="n8n-title">🔧 Ejemplos de flujos n8n</div>
+        <div class="n8n-flow">
+          <div class="n8n-node" data-i18n="n8n-f1a">📥 Formulario</div>
+          <div class="n8n-arr">→</div>
+          <div class="n8n-node hl">🤖 IA</div>
+          <div class="n8n-arr">→</div>
+          <div class="n8n-node">📊 Sheets</div>
+          <div class="n8n-arr">→</div>
+          <div class="n8n-node hl">💬 WA</div>
+        </div>
+        <div class="n8n-flow">
+          <div class="n8n-node" data-i18n="n8n-f2a">📦 Pedido</div>
+          <div class="n8n-arr">→</div>
+          <div class="n8n-node hl">⚡ n8n</div>
+          <div class="n8n-arr">→</div>
+          <div class="n8n-node">📧 Email</div>
+          <div class="n8n-arr">→</div>
+          <div class="n8n-node">✅ OK</div>
+        </div>
+        <div class="n8n-flow">
+          <div class="n8n-node" data-i18n="n8n-f3a">📅 Turno</div>
+          <div class="n8n-arr">→</div>
+          <div class="n8n-node hl">🗓️ Calendar</div>
+          <div class="n8n-arr">→</div>
+          <div class="n8n-node hl" data-i18n="n8n-reminder">💬 Recordatorio</div>
+        </div>
+        <div class="n8n-note" data-i18n="n8n-note">
+          <strong style="color:var(--teal2)">n8n</strong> conecta +400 servicios. Los flujos corren solos, 24/7, con alertas si algo falla. Podemos hostear en tu infraestructura para mayor control.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CASO DE ÉXITO -->
+<section class="section" id="casos">
+  <div class="section-inner">
+    <div class="section-tag" data-i18n="casos-tag">Casos de éxito</div>
+    <h2 class="section-title" data-i18n="casos-title">Resultados reales</h2>
+    <p class="section-desc" data-i18n="casos-desc">Empresas que confiaron en DiGiAssist y transformaron sus operaciones.</p>
+    <div class="case-study">
+      <div class="case-header">
+        <div class="case-logo-box">🌐</div>
+        <div>
+          <h3>TecnoGlobal</h3>
+          <p data-i18n="case-sub">Empresa comercial · Córdoba — DGAStorePanel en producción</p>
+        </div>
+        <div class="case-tag" data-i18n="case-tag">✓ En producción</div>
+      </div>
+      <div class="case-body">
+        <div class="case-metric"><div class="case-metric-num">100%</div><div class="case-metric-label" data-i18n="case-m1">Proceso de ventas digitalizado</div></div>
+        <div class="case-metric"><div class="case-metric-num">0</div><div class="case-metric-label" data-i18n="case-m2">Errores por planillas manuales</div></div>
+        <div class="case-metric"><div class="case-metric-num">24/7</div><div class="case-metric-label" data-i18n="case-m3">Sistema disponible</div></div>
+        <div class="case-quote" data-i18n="case-quote">
+          "DiGiAssist desarrolló un sistema que se adaptó exactamente a nuestra forma de trabajar. Pasamos de planillas Excel a un sistema propio que el equipo adoptó desde el primer día."
+          <cite>— Equipo TecnoGlobal</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="section" id="proceso">
+  <div class="section-inner text-center">
+    <div class="section-tag" data-i18n="proceso-tag">Cómo trabajamos</div>
+    <h2 class="section-title" data-i18n="proceso-title">Del brief al sistema en producción</h2>
+    <div class="steps-row">
+      <div class="step"><div class="step-num">01</div><h3 data-i18n="step1-title">Brief</h3><p data-i18n="step1-desc">Entendemos tus objetivos, procesos y restricciones. Sin tecnicismos.</p></div>
+      <div class="step"><div class="step-num">02</div><h3 data-i18n="step2-title">Diseño</h3><p data-i18n="step2-desc">Proponemos la arquitectura, tecnologías y alcance con presupuesto claro.</p></div>
+      <div class="step"><div class="step-num">03</div><h3 data-i18n="step3-title">Desarrollo</h3><p data-i18n="step3-desc">Iteramos rápido con demos reales para que veas el avance.</p></div>
+      <div class="step"><div class="step-num">04</div><h3 data-i18n="step4-title">Producción</h3><p data-i18n="step4-desc">Desplegamos, capacitamos y acompañamos el lanzamiento.</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="section-inner">
+    <div class="section-tag text-center" data-i18n="faq-tag">Preguntas frecuentes</div>
+    <h2 class="section-title text-center" data-i18n="faq-title">FAQ</h2>
+    <div class="faq-list">
+      <details><summary data-i18n="faq1-q">¿Cuánto tarda desarrollar un software a medida?</summary><p data-i18n="faq1-a">Depende de la complejidad. Un sistema básico como gestión de stock puede estar listo en 3–4 semanas. Proyectos más grandes se presupuestan por etapas con entregables parciales.</p></details>
+      <details><summary data-i18n="faq2-q">¿Qué es n8n y por qué lo usan?</summary><p data-i18n="faq2-a">n8n es una plataforma de automatización open-source que permite conectar +400 servicios. Es flexible, potente y se puede hostear en tu propia infraestructura para mayor control y privacidad de datos.</p></details>
+      <details><summary data-i18n="faq3-q">¿Los productos (DGAStorePanel y DGAChat) se pueden adaptar?</summary><p data-i18n="faq3-a">Sí. Son la base. Podemos ajustar funcionalidades, agregar módulos o integrarlos con tus sistemas existentes. El costo depende del alcance de la personalización.</p></details>
+      <details><summary data-i18n="faq4-q">¿Cómo funciona el agente de WhatsApp?</summary><p data-i18n="faq4-a">Se conecta a tu número de WhatsApp Business vía webhook. Recibe mensajes, los procesa con IA y responde según las reglas configuradas. Si no sabe, deriva a una persona real con todo el historial.</p></details>
+      <details><summary data-i18n="faq5-q">¿Puedo empezar con un agente listo y después personalizarlo?</summary><p data-i18n="faq5-a">Sí. Arrancás rápido con un agente prearmado y después lo adaptamos a tus procesos sin perder la configuración base.</p></details>
+      <details><summary data-i18n="faq6-q">¿Trabajan con organismos públicos?</summary><p data-i18n="faq6-a">Sí. Tenemos experiencia y estamos formalizando la estructura para participar en licitaciones y contratos con el Estado. Consultanos por tu caso específico.</p></details>
+      <details><summary data-i18n="faq7-q">¿Qué necesito para contratar?</summary><p data-i18n="faq7-a">Una reunión inicial para entender el proyecto, luego firmamos un contrato de prestación de servicios y acordamos plazos y pagos. Podés operar como persona física con CUIT o empresa.</p></details>
+      <details><summary data-i18n="faq8-q">¿Necesito saber programar para usar los productos?</summary><p data-i18n="faq8-a">No. Los productos están diseñados para usuarios no técnicos. Hacemos la implementación, configuración y capacitación del equipo.</p></details>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACTO -->
+<section class="section" id="contacto">
+  <div class="section-inner">
+    <div class="section-tag" data-i18n="contacto-tag">Contacto</div>
+    <h2 class="section-title" data-i18n="contacto-title">Hablemos de tu proyecto</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p data-i18n="contacto-desc">¿Tenés una idea, un proceso para automatizar o un sistema que necesitás? Contame y te respondo rápido.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📧</div>
+          <div><div style="font-weight:600;font-size:.85rem;color:var(--text)">Email</div><div>digiassistteam@gmail.com</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📱</div>
+          <div><div style="font-weight:600;font-size:.85rem;color:var(--text)">WhatsApp</div><div>+54 9 351 856-9995</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📍</div>
+          <div><div style="font-weight:600;font-size:.85rem;color:var(--text)" data-i18n="loc-label">Ubicación</div><div>Villa Allende, Córdoba, Argentina</div></div>
+        </div>
+        <div style="margin-top:.5rem">
+          <a href="https://wa.me/5493518569995?text=Hola%20Franco!%20Vi%20tu%20sitio%20y%20me%20interesa%20hablar%20de%20un%20proyecto." class="btn btn-primary" target="_blank" rel="noopener" data-i18n="wa-btn">💬 Escribir por WhatsApp</a>
+        </div>
+      </div>
+      <div class="contact-form-card">
+        <form id="leadForm" autocomplete="on">
+          <div class="form-group"><label data-i18n="form-nombre">Nombre *</label><input name="nombre" required placeholder="Tu nombre completo" data-ph-es="Tu nombre completo" data-ph-en="Your full name"></div>
+          <div class="form-group"><label data-i18n="form-email">Email *</label><input name="email" type="email" required placeholder="tu@empresa.com" data-ph-es="tu@empresa.com" data-ph-en="your@company.com"></div>
+          <div class="form-group">
+            <label data-i18n="form-tipo">¿Qué necesitás?</label>
+            <select name="tipo">
+              <option value="" data-ph-es="— Seleccioná una opción —" data-ph-en="— Select an option —">— Seleccioná una opción —</option>
+              <option value="software-medida" data-opt-es="Software a medida" data-opt-en="Custom software">Software a medida</option>
+              <option value="automatizacion" data-opt-es="Automatización con n8n / IA" data-opt-en="Automation with n8n / AI">Automatización con n8n / IA</option>
+              <option value="dgastorepanel" data-opt-es="DGAStorePanel (ventas, remitos y stock)" data-opt-en="DGAStorePanel (sales, receipts & stock)">DGAStorePanel (ventas, remitos y stock)</option>
+              <option value="dgachat" data-opt-es="DGAChat (gestión WhatsApp)" data-opt-en="DGAChat (WhatsApp management)">DGAChat (gestión WhatsApp)</option>
+              <option value="otro" data-opt-es="Otro" data-opt-en="Other">Otro</option>
+            </select>
+          </div>
+          <div class="form-group"><label data-i18n="form-mensaje">Mensaje *</label><textarea name="mensaje" required placeholder="Contame brevemente tu proyecto o necesidad..." data-ph-es="Contame brevemente tu proyecto o necesidad..." data-ph-en="Briefly tell me about your project or need..."></textarea></div>
+          <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off">
+          <button type="submit" class="btn btn-primary" style="width:100%" data-i18n="form-submit">Enviar consulta</button>
+          <p id="formMsg" class="form-msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="cta-section">
+  <div style="max-width:1160px;margin:0 auto;position:relative;z-index:1">
+    <h2 data-i18n="cta-title">¿Listo para empezar?</h2>
+    <p data-i18n="cta-desc">Una reunión de 30 minutos es suficiente para entender tu necesidad y darte un camino claro.</p>
+    <a href="https://wa.me/5493518569995?text=Hola!%20Quiero%20agendar%20una%20reuni%C3%B3n%20para%20hablar%20de%20mi%20proyecto." class="btn btn-primary" target="_blank" rel="noopener" data-i18n="cta-btn">Agendá una reunión gratis →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">DiGiAssist</div>
+    <div class="footer-copy" data-i18n="footer-copy">© 2026 DiGiAssist. Todos los derechos reservados. · Villa Allende, Córdoba</div>
+    <div class="footer-links">
+      <a href="#servicios" data-i18n="nav-servicios">Servicios</a>
+      <a href="#productos" data-i18n="nav-productos">Productos</a>
+      <a href="#contacto" data-i18n="nav-contacto">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/5493518569995" class="fab-wa" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.4 283.8 32 224.8 32c-117.5 0-213 95.6-213 213.1 0 40.1 11 79.3 31.8 113.3L0 480l124.6-32.5c32.7 17.9 69.3 27.3 107 27.3h.1c117.5 0 213.1-95.6 213.1-213.1 0-57-22.8-110.6-64.9-152.6zM224.8 438.6c-33.4 0-66.3-8.9-95.1-25.7l-6.8-4-73.8 19.3 19.6-71.7-4.4-7c-19.4-31.1-29.6-67.3-29.6-104 0-107.6 87.5-195.1 195.1-195.1 52.1 0 101.1 20.4 138 57.3s57 85.8 57 137.9c.1 107.6-87.4 195-195 195zm107.2-147.8c-5.9-3-35-17.3-40.4-19.3-5.4-2-9.3-3-13.1 3-3.7 6-15 19.3-18.3 23.2-3.4 3.9-6.7 4.3-12.5 1.5-33.9-17-56.2-30.3-79-68.7-5.9-10.2 5.9-9.5 17-31.6 1.9-3.9.9-7.3-.5-10.3-1.5-3-13.1-31.3-17.9-42.9-4.7-11.5-9.5-10-13.1-10.2-3.4-.2-7.3-.2-11.2-.2-3.9 0-10.3 1.5-15.7 7.3-5.4 5.9-20.7 20.3-20.7 49.5 0 29.2 21.2 57.4 24.1 61.3 2.9 3.9 41.7 63.7 101.6 89.3 14.2 6.1 25.3 9.7 33.9 12.4 14.2 4.5 27.2 3.9 37.5 2.4 11.4-1.7 35-14.3 40-28.1 4.9-13.8 4.9-25.5 3.4-28.1-1.5-2.6-5.4-3.9-11.4-6.9z"/></svg>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+// ── EmailJS init ──────────────────────────────────────────────
+// Reemplazá estos valores con los tuyos de emailjs.com (gratis)
+const EJS_SERVICE  = 'TU_SERVICE_ID';   // ej: 'service_abc123'
+const EJS_TEMPLATE = 'TU_TEMPLATE_ID';  // ej: 'template_xyz789'
+const EJS_KEY      = 'TU_PUBLIC_KEY';   // ej: 'abcXYZ123'
+emailjs.init(EJS_KEY);
+
+const form = document.getElementById('leadForm');
+const msg  = document.getElementById('formMsg');
+
+form?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (form.website?.value) return; // honeypot
+  const btn = form.querySelector('button[type="submit"]');
+  const prev = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = lang === 'en' ? 'Sending…' : 'Enviando…';
+  msg.textContent = '';
+  try {
+    await emailjs.sendForm(EJS_SERVICE, EJS_TEMPLATE, form);
+    msg.style.color = 'var(--teal2)';
+    msg.textContent = lang === 'en' ? 'Message sent! I\'ll reply soon 👌' : '¡Mensaje enviado! Te respondo a la brevedad 👌';
+    form.reset();
+  } catch(err) {
+    msg.style.color = 'var(--muted)';
+    msg.textContent = lang === 'en' ? 'Oops, there was a problem. Write me on WhatsApp 😉' : 'Ups, hubo un problema. Escribime por WhatsApp 😉';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = prev;
+  }
+});
+
+// ── Tema ──────────────────────────────────────────────────────
+window.toggleTheme = function() {
+  const isLight = document.body.classList.toggle('light');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  document.getElementById('themeBtn').textContent = isLight ? '🌙' : '🌞';
+};
+
+// ── Idioma / i18n ─────────────────────────────────────────────
+let lang = localStorage.getItem('lang') || 'es';
+
+const i18n = {
+  es: {
+    'nav-servicios':     'Servicios',
+    'nav-productos':     'Productos',
+    'nav-automatizaciones': 'Automatizaciones',
+    'nav-casos':         'Casos',
+    'nav-faq':           'FAQ',
+    'nav-contacto':      'Contacto',
+    'hero-badge':        '● Córdoba, Argentina · Disponible 24/7',
+    'hero-h1':           'Software inteligente que <em>trabaja</em><br>por tu empresa',
+    'hero-sub':          'Desarrollamos software a medida, automatizamos procesos con IA y n8n, y ofrecemos productos digitales listos para que tu negocio escale sin fricciones.',
+    'hero-btn1':         'Hablemos →',
+    'hero-btn2':         'Ver productos',
+    'stat1-label':       'Productos en producción',
+    'stat2-label':       'Disponibilidad',
+    'stat3-label':       'Automatizaciones',
+    'stat4-label':       'Agentes conversacionales',
+    'servicios-tag':     'Lo que hacemos',
+    'servicios-title':   'Tres pilares, un solo proveedor',
+    'servicios-desc':    'Del código a la automatización, cubrimos todo el stack tecnológico que tu empresa necesita.',
+    'productos-tag':     'Productos DiGiAssist',
+    'productos-title':   'Listos para implementar',
+    'productos-desc':    'Construidos, probados en producción y disponibles para licenciar o adaptar a tu empresa.',
+    'auto-tag':          'n8n · IA · Webhooks',
+    'auto-title':        'Automatizamos lo que hoy hacés a mano',
+    'auto-desc':         'Con n8n conectamos cualquier herramienta con cualquier otra. Sin código, con resultados reales.',
+    'casos-tag':         'Casos de éxito',
+    'casos-title':       'Resultados reales',
+    'casos-desc':        'Empresas que confiaron en DiGiAssist y transformaron sus operaciones.',
+    'proceso-tag':       'Cómo trabajamos',
+    'proceso-title':     'Del brief al sistema en producción',
+    'faq-tag':           'Preguntas frecuentes',
+    'faq-title':         'FAQ',
+    'contacto-tag':      'Contacto',
+    'contacto-title':    'Hablemos de tu proyecto',
+    'contacto-desc':     '¿Tenés una idea, un proceso para automatizar o un sistema que necesitás? Contame y te respondo rápido.',
+    'wa-btn':            '💬 Escribir por WhatsApp',
+    'form-nombre':       'Nombre *',
+    'form-email':        'Email *',
+    'form-tipo':         '¿Qué necesitás?',
+    'form-mensaje':      'Mensaje *',
+    'form-submit':       'Enviar consulta',
+    'cta-title':         '¿Listo para empezar?',
+    'cta-desc':          'Una reunión de 30 minutos es suficiente para entender tu necesidad y darte un camino claro.',
+    'cta-btn':           'Agendá una reunión gratis →',
+    // Servicios cards
+    's1-title': 'Software a medida',
+    's1-desc':  'Aplicaciones web y sistemas de gestión construidos exactamente para tu proceso.',
+    's1-li1':   'Gestión de ventas y stock',
+    's1-li2':   'Paneles administrativos',
+    's1-li3':   'Integración con sistemas existentes',
+    's1-li4':   'APIs y webhooks',
+    's1-link':  'Consultá tu proyecto →',
+    's2-title': 'Agentes de IA',
+    's2-desc':  'Asistentes conversacionales para WhatsApp y web que automatizan atención y ventas.',
+    's2-li1':   'Conexión vía webhook a WhatsApp',
+    's2-li2':   'Soporte, ventas y turnos 24/7',
+    's2-li3':   'Entrenados con tus datos',
+    's2-li4':   'Handoff a humano cuando hace falta',
+    's2-link':  'Ver agentes →',
+    's3-title': 'Automatizaciones',
+    's3-desc':  'Flujos con n8n que conectan tus herramientas y eliminan tareas repetitivas.',
+    's3-li1':   'Integración de apps y servicios',
+    's3-li2':   'Notificaciones y reportes automáticos',
+    's3-li3':   'Procesamiento en tiempo real',
+    's3-li4':   'Sin necesidad de programar',
+    's3-link':  'Ver automatizaciones →',
+    // Proceso steps
+    'step1-title': 'Brief',       'step1-desc': 'Entendemos tus objetivos, procesos y restricciones. Sin tecnicismos.',
+    'step2-title': 'Diseño',      'step2-desc': 'Proponemos la arquitectura, tecnologías y alcance con presupuesto claro.',
+    'step3-title': 'Desarrollo',  'step3-desc': 'Iteramos rápido con demos reales para que veas el avance.',
+    'step4-title': 'Producción',  'step4-desc': 'Desplegamos, capacitamos y acompañamos el lanzamiento.',
+    // Productos
+    'p1-desc': 'ERP liviano para comercios: ventas, remitos, stock, métricas y usuarios en un solo sistema web.',
+    'p1-f1':'Registrar ventas + remitos','p1-f2':'Control de stock en tiempo real','p1-f3':'Alertas de stock crítico','p1-f4':'Métricas: hoy / semana / mes',
+    'p1-f5':'Gráficos de evolución de ventas','p1-f6':'Gestión de usuarios y roles','p1-f7':'Historial y reportes','p1-f8':'Acceso web desde cualquier lugar',
+    'p1-badge':'⭐ Ideal para comercios y distribuidoras','p-demo':'Solicitar demo →',
+    'p2-desc': 'Plataforma de gestión de conversaciones WhatsApp para equipos. CRM conversacional propio.',
+    'p2-f1':'Conexión por webhook','p2-f2':'Bandeja multiagente','p2-f3':'Asignación de chats','p2-f4':'Historial completo',
+    'p2-f5':'Etiquetas y estados','p2-f6':'Notas internas','p2-f7':'Respuestas rápidas','p2-f8':'Dashboard de métricas',
+    'p2-badge':'⭐ Ideal para organismos y empresas',
+    // Automatizaciones
+    'a1-title':'Notificaciones automáticas','a1-desc':'WhatsApp, email o Telegram cuando pasa algo importante en tu sistema.',
+    'a2-title':'Sincronización de datos','a2-desc':'Google Sheets, CRM, ERP o cualquier base conectados en tiempo real.',
+    'a3-title':'Procesamiento de leads','a3-desc':'Formularios → IA califica → CRM registra → WhatsApp notifica. Solo.',
+    'a4-title':'Reportes programados','a4-desc':'Informes automáticos diarios, semanales o mensuales sin intervención.',
+    'a5-title':'Flujos de aprobación','a5-desc':'Solicitudes, validaciones y notificaciones internas automatizadas.',
+    'n8n-title':'🔧 Ejemplos de flujos n8n','n8n-f1a':'📥 Formulario','n8n-f2a':'📦 Pedido','n8n-f3a':'📅 Turno','n8n-reminder':'💬 Recordatorio',
+    'n8n-note':'<strong style="color:var(--teal2)">n8n</strong> conecta +400 servicios. Los flujos corren solos, 24/7, con alertas si algo falla. Podemos hostear en tu infraestructura para mayor control.',
+    // Caso de éxito
+    'case-sub':'Empresa comercial · Córdoba — DGAStorePanel en producción','case-tag':'✓ En producción',
+    'case-m1':'Proceso de ventas digitalizado','case-m2':'Errores por planillas manuales','case-m3':'Sistema disponible',
+    'case-quote':'"DiGiAssist desarrolló un sistema que se adaptó exactamente a nuestra forma de trabajar. Pasamos de planillas Excel a un sistema propio que el equipo adoptó desde el primer día." <cite>— Equipo TecnoGlobal</cite>',
+    // FAQ
+    'faq1-q':'¿Cuánto tarda desarrollar un software a medida?','faq1-a':'Depende de la complejidad. Un sistema básico puede estar listo en 3–4 semanas. Proyectos más grandes se presupuestan por etapas.',
+    'faq2-q':'¿Qué es n8n y por qué lo usan?','faq2-a':'n8n es una plataforma de automatización open-source que permite conectar +400 servicios. Es flexible, potente y se puede hostear en tu infraestructura.',
+    'faq3-q':'¿Los productos (DGAStorePanel y DGAChat) se pueden adaptar?','faq3-a':'Sí. Son la base. Podemos ajustar funcionalidades, agregar módulos o integrarlos con tus sistemas existentes.',
+    'faq4-q':'¿Cómo funciona el agente de WhatsApp?','faq4-a':'Se conecta vía webhook, procesa con IA y responde según las reglas. Si no sabe, deriva a una persona real con todo el historial.',
+    'faq5-q':'¿Puedo empezar con un agente listo y después personalizarlo?','faq5-a':'Sí. Arrancás rápido y después lo adaptamos a tus procesos sin perder la configuración base.',
+    'faq6-q':'¿Trabajan con organismos públicos?','faq6-a':'Sí. Tenemos experiencia y estamos formalizando la estructura para participar en licitaciones con el Estado.',
+    'faq7-q':'¿Qué necesito para contratar?','faq7-a':'Una reunión inicial, luego firmamos un contrato y acordamos plazos y pagos. Podés operar como persona física con CUIT o empresa.',
+    'loc-label': 'Ubicación',
+    'footer-copy': '© 2026 DiGiAssist. Todos los derechos reservados. · Villa Allende, Córdoba',
+  },
+  en: {
+    'nav-servicios':     'Services',
+    'nav-productos':     'Products',
+    'nav-automatizaciones': 'Automations',
+    'nav-casos':         'Cases',
+    'nav-faq':           'FAQ',
+    'nav-contacto':      'Contact',
+    'hero-badge':        '● Córdoba, Argentina · Available 24/7',
+    'hero-h1':           'Intelligent software that <em>works</em><br>for your business',
+    'hero-sub':          'We build custom software, automate processes with AI and n8n, and offer ready-made digital products so your business scales without friction.',
+    'hero-btn1':         'Let\'s talk →',
+    'hero-btn2':         'See products',
+    'stat1-label':       'Products in production',
+    'stat2-label':       'Availability',
+    'stat3-label':       'Automations',
+    'stat4-label':       'Conversational agents',
+    'servicios-tag':     'What we do',
+    'servicios-title':   'Three pillars, one provider',
+    'servicios-desc':    'From code to automation, we cover the full tech stack your business needs.',
+    'productos-tag':     'DiGiAssist Products',
+    'productos-title':   'Ready to deploy',
+    'productos-desc':    'Built, tested in production and available to license or adapt for your company.',
+    'auto-tag':          'n8n · AI · Webhooks',
+    'auto-title':        'We automate what you do manually today',
+    'auto-desc':         'With n8n we connect any tool with any other. No code, real results.',
+    'casos-tag':         'Success cases',
+    'casos-title':       'Real results',
+    'casos-desc':        'Companies that trusted DiGiAssist and transformed their operations.',
+    'proceso-tag':       'How we work',
+    'proceso-title':     'From brief to production',
+    'faq-tag':           'Frequently asked questions',
+    'faq-title':         'FAQ',
+    'contacto-tag':      'Contact',
+    'contacto-title':    'Let\'s talk about your project',
+    'contacto-desc':     'Have an idea, a process to automate or a system you need? Tell me and I\'ll reply quickly.',
+    'wa-btn':            '💬 Write on WhatsApp',
+    'form-nombre':       'Name *',
+    'form-email':        'Email *',
+    'form-tipo':         'What do you need?',
+    'form-mensaje':      'Message *',
+    'form-submit':       'Send inquiry',
+    'cta-title':         'Ready to start?',
+    'cta-desc':          'A 30-minute meeting is enough to understand your need and give you a clear path.',
+    'cta-btn':           'Book a free meeting →',
+    // Services cards
+    's1-title': 'Custom Software',
+    's1-desc':  'Web applications and management systems built exactly for your process.',
+    's1-li1':   'Sales and stock management',
+    's1-li2':   'Admin dashboards',
+    's1-li3':   'Integration with existing systems',
+    's1-li4':   'APIs and webhooks',
+    's1-link':  'Discuss your project →',
+    's2-title': 'AI Agents',
+    's2-desc':  'Conversational assistants for WhatsApp and web that automate support and sales.',
+    's2-li1':   'Webhook connection to WhatsApp',
+    's2-li2':   'Support, sales and bookings 24/7',
+    's2-li3':   'Trained with your data',
+    's2-li4':   'Handoff to human when needed',
+    's2-link':  'See agents →',
+    's3-title': 'Automations',
+    's3-desc':  'n8n flows that connect your tools and eliminate repetitive tasks.',
+    's3-li1':   'App and service integration',
+    's3-li2':   'Automatic notifications and reports',
+    's3-li3':   'Real-time processing',
+    's3-li4':   'No coding required',
+    's3-link':  'See automations →',
+    // Process steps
+    'step1-title': 'Brief',        'step1-desc': 'We understand your goals, processes and constraints. No tech jargon.',
+    'step2-title': 'Design',       'step2-desc': 'We propose the architecture, technologies and scope with a clear budget.',
+    'step3-title': 'Development',  'step3-desc': 'We iterate fast with real demos so you can see the progress.',
+    'step4-title': 'Production',   'step4-desc': 'We deploy, train your team and support the launch.',
+    // Products
+    'p1-desc': 'Lightweight ERP for retailers: sales, receipts, stock, metrics and users in one web system.',
+    'p1-f1':'Register sales + receipts','p1-f2':'Real-time stock control','p1-f3':'Low stock alerts','p1-f4':'Metrics: today / week / month',
+    'p1-f5':'Sales evolution charts','p1-f6':'User and role management','p1-f7':'History and reports','p1-f8':'Web access from anywhere',
+    'p1-badge':'⭐ Ideal for retailers and distributors','p-demo':'Request demo →',
+    'p2-desc': 'WhatsApp conversation management platform for teams. Your own conversational CRM.',
+    'p2-f1':'Webhook connection','p2-f2':'Multi-agent inbox','p2-f3':'Chat assignment','p2-f4':'Full history',
+    'p2-f5':'Tags and statuses','p2-f6':'Internal notes','p2-f7':'Quick replies','p2-f8':'Metrics dashboard',
+    'p2-badge':'⭐ Ideal for organizations and companies',
+    // Automations
+    'a1-title':'Automatic notifications','a1-desc':'WhatsApp, email or Telegram when something important happens in your system.',
+    'a2-title':'Data synchronization','a2-desc':'Google Sheets, CRM, ERP or any database connected in real time.',
+    'a3-title':'Lead processing','a3-desc':'Forms → AI qualifies → CRM records → WhatsApp notifies. Automatically.',
+    'a4-title':'Scheduled reports','a4-desc':'Automatic daily, weekly or monthly reports without intervention.',
+    'a5-title':'Approval flows','a5-desc':'Internal requests, validations and notifications automated.',
+    'n8n-title':'🔧 Example n8n flows','n8n-f1a':'📥 Form','n8n-f2a':'📦 Order','n8n-f3a':'📅 Appointment','n8n-reminder':'💬 Reminder',
+    'n8n-note':'<strong style="color:var(--teal2)">n8n</strong> connects 400+ services. Flows run on their own, 24/7, with alerts if something fails. We can host on your infrastructure for more control.',
+    // Case study
+    'case-sub':'Commercial company · Córdoba — DGAStorePanel in production','case-tag':'✓ In production',
+    'case-m1':'Sales process digitized','case-m2':'Errors from manual spreadsheets','case-m3':'System available',
+    'case-quote':'"DiGiAssist built a system that adapted exactly to our way of working. We went from Excel spreadsheets to our own system that the team adopted from day one." <cite>— TecnoGlobal Team</cite>',
+    // FAQ
+    'faq1-q':'How long does it take to develop custom software?','faq1-a':'It depends on complexity. A basic system can be ready in 3–4 weeks. Larger projects are budgeted in stages with partial deliverables.',
+    'faq2-q':'What is n8n and why do you use it?','faq2-a':'n8n is an open-source automation platform that connects 400+ services. It\'s flexible, powerful and can be hosted on your own infrastructure.',
+    'faq3-q':'Can the products (DGAStorePanel and DGAChat) be customized?','faq3-a':'Yes. They are the base. We can adjust features, add modules or integrate them with your existing systems.',
+    'faq4-q':'How does the WhatsApp agent work?','faq4-a':'It connects via webhook, processes with AI and responds according to configured rules. If it doesn\'t know, it hands off to a real person with full history.',
+    'faq5-q':'Can I start with a ready-made agent and customize it later?','faq5-a':'Yes. Start fast with a pre-built agent and then adapt it to your processes without losing the base configuration.',
+    'faq6-q':'Do you work with public organizations?','faq6-a':'Yes. We have experience and are formalizing our structure to participate in government tenders and contracts.',
+    'faq7-q':'What do I need to hire you?','faq7-a':'An initial meeting to understand the project, then we sign a service contract and agree on timelines and payments.',
+    'loc-label': 'Location',
+    'footer-copy': '© 2026 DiGiAssist. All rights reserved. · Villa Allende, Córdoba',
+  }
+};
+
+function applyLang(l) {
+  lang = l;
+  localStorage.setItem('lang', l);
+  document.documentElement.lang = l;
+  document.getElementById('langBtn').textContent = l === 'es' ? 'EN' : 'ES';
+
+  // Translate data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[l][key] !== undefined) el.innerHTML = i18n[l][key];
+  });
+
+  // Translate placeholders (inputs & textareas)
+  document.querySelectorAll('[data-ph-es]').forEach(el => {
+    el.placeholder = l === 'en' ? el.getAttribute('data-ph-en') : el.getAttribute('data-ph-es');
+  });
+
+  // Translate select options (data-opt-es / data-opt-en)
+  document.querySelectorAll('option[data-opt-es]').forEach(opt => {
+    opt.textContent = l === 'en' ? opt.getAttribute('data-opt-en') : opt.getAttribute('data-opt-es');
+  });
+  // Translate placeholder option (data-ph-es / data-ph-en on <option>)
+  document.querySelectorAll('option[data-ph-es]').forEach(opt => {
+    opt.textContent = l === 'en' ? opt.getAttribute('data-ph-en') : opt.getAttribute('data-ph-es');
+  });
+}
+
+window.toggleLang = function() {
+  applyLang(lang === 'es' ? 'en' : 'es');
+};
+
+// ── Init ──────────────────────────────────────────────────────
+(function(){
+  if(localStorage.getItem('theme')==='light'){
+    document.body.classList.add('light');
+    document.getElementById('themeBtn').textContent='🌙';
+  }
+  applyLang(lang);
+})();
+</script>
+</body>
+</html>
