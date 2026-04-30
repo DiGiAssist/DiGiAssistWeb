@@ -41,7 +41,7 @@
 
 /* ── Reset ─────────────────────────────────────────────── */
 *{ box-sizing:border-box; }
-html,body{ margin:0; padding:0; }
+html,body{ margin:0; padding:0; overflow-x:hidden; }
 body{
   font-family:'Geist', ui-sans-serif, system-ui, sans-serif;
   background:var(--bg); color:var(--fg);
@@ -195,9 +195,9 @@ section{ position:relative; padding:100px 24px; }
 .mock-stage:hover .mock-chat{ transform:rotateY(-6deg) rotateX(2deg) translateZ(40px) translateY(-6px); }
 .mock-stage:hover .mock-store{ transform:rotateY(-6deg) rotateX(2deg) translateY(6px); }
 @media(max-width:960px){
-  .mock-stage{ height:260px; perspective:1200px; }
-  .mock-chat{ left:2%; top:4%; width:58%; }
-  .mock-store{ right:0; bottom:4%; width:58%; }
+  .mock-stage{ height:240px; perspective:none; overflow:hidden; }
+  .mock-chat{ left:0; top:0; width:55%; transform:none !important; }
+  .mock-store{ right:0; bottom:0; width:55%; transform:none !important; }
 }
 .mock-top{ display:flex; align-items:center; gap:8px; padding:11px 14px; background:var(--bg-3); border-bottom:1px solid var(--border); }
 .mock-top .dots{ display:flex; gap:5px; }
