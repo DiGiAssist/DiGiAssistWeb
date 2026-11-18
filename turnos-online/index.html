@@ -24,8 +24,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/estilo.css?v=2026-11-19d">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Service", "name": "Turnos online para consultorios en Córdoba", "description": "Agenda online por profesional, pago de la consulta con Mercado Pago y atención por chat y WhatsApp. Sistema de turnos para consultorios, hecho en Córdoba.", "provider": {"@type": "ProfessionalService", "name": "DiGiAssist", "url": "https://digiassist.com.ar/"}, "areaServed": {"@type": "AdministrativeArea", "name": "Córdoba, Argentina"}, "url": "https://digiassist.com.ar/turnos-online/"}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Sirve si somos varios profesionales?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Cada profesional tiene su propia agenda y puede cobrar con su propia cuenta de Mercado Pago."}}, {"@type": "Question", "name": "¿Los pacientes tienen que instalar una aplicación?", "acceptedAnswer": {"@type": "Answer", "text": "No. Reservan desde el celular o la computadora, o por el chat de la página. No hace falta instalar nada."}}, {"@type": "Question", "name": "¿Cuidan los datos de los pacientes?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Por ejemplo, en el Programa de Endometriosis el DNI de las pacientes se guarda cifrado. Revisamos con vos qué datos se piden y cuáles hacen falta."}}, {"@type": "Question", "name": "¿Cuánto tarda y cuánto cuesta?", "acceptedAnswer": {"@type": "Answer", "text": "Un sistema de turnos arranca desde USD 500 (no incluye el mantenimiento mensual) y el plazo depende de cuántos profesionales y servicios tengas. Después de una charla de 30 minutos te pasamos un precio y un plazo claros."}}]}]</script>
+<link rel="stylesheet" href="/estilo.css?v=2026-11-19i">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Service", "name": "Turnos online para consultorios en Córdoba", "description": "Agenda online por profesional, pago de la consulta con Mercado Pago y atención por chat y WhatsApp. Sistema de turnos para consultorios, hecho en Córdoba.", "provider": {"@type": "ProfessionalService", "name": "DiGiAssist", "url": "https://digiassist.com.ar/"}, "areaServed": {"@type": "AdministrativeArea", "name": "Córdoba, Argentina"}, "url": "https://digiassist.com.ar/turnos-online/"}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Sirve si somos varios profesionales?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Cada profesional tiene su propia agenda y puede cobrar con su propia cuenta de Mercado Pago."}}, {"@type": "Question", "name": "¿Los pacientes tienen que instalar una aplicación?", "acceptedAnswer": {"@type": "Answer", "text": "No. Reservan desde el celular o la computadora, o por el chat de la página. No hace falta instalar nada."}}, {"@type": "Question", "name": "¿Cuidan los datos de los pacientes?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Los datos sensibles, como el DNI, se guardan cifrados, y revisamos con vos qué datos se piden y cuáles hacen falta."}}, {"@type": "Question", "name": "¿Cuánto tarda y cuánto cuesta?", "acceptedAnswer": {"@type": "Answer", "text": "Un sistema de turnos arranca desde USD 500 (no incluye el mantenimiento mensual) y el plazo depende de cuántos profesionales y servicios tengas. Después de una charla de 30 minutos te pasamos un precio y un plazo claros."}}]}]</script>
 </head>
 <body>
 <canvas class="puntos" id="puntos" aria-hidden="true"></canvas>
@@ -104,7 +104,6 @@
             <span class="estado">En línea</span>
             <h3>Programa de Endometriosis · Dra. Mónica Bonin</h3>
             <p>Sitio para un equipo médico interdisciplinario: reserva de turnos con agenda propia por profesional, pagos con Mercado Pago, información en español e inglés y un asistente de consultas.</p>
-            <p class="resuelve"><b>Qué resuelve:</b> las pacientes reservan y pagan online, y la secretaria ve todo desde un panel.</p>
             <a class="rotulo" href="https://draboninendometriosis.com/" target="_blank" rel="noopener">draboninendometriosis.com ↗</a>
           </div>
         </article>
@@ -137,7 +136,7 @@
       <div>
         <details><summary>¿Sirve si somos varios profesionales?</summary><p>Sí. Cada profesional tiene su propia agenda y puede cobrar con su propia cuenta de Mercado Pago.</p></details>
         <details><summary>¿Los pacientes tienen que instalar una aplicación?</summary><p>No. Reservan desde el celular o la computadora, o por el chat de la página. No hace falta instalar nada.</p></details>
-        <details><summary>¿Cuidan los datos de los pacientes?</summary><p>Sí. Por ejemplo, en el Programa de Endometriosis el DNI de las pacientes se guarda cifrado. Revisamos con vos qué datos se piden y cuáles hacen falta.</p></details>
+        <details><summary>¿Cuidan los datos de los pacientes?</summary><p>Sí. Los datos sensibles, como el DNI, se guardan cifrados, y revisamos con vos qué datos se piden y cuáles hacen falta.</p></details>
         <details><summary>¿Cuánto tarda y cuánto cuesta?</summary><p>Un sistema de turnos arranca desde USD 500 (no incluye el mantenimiento mensual) y el plazo depende de cuántos profesionales y servicios tengas. Después de una charla de 30 minutos te pasamos un precio y un plazo claros.</p></details>
       </div>
     </div>
@@ -190,6 +189,6 @@
     document.querySelectorAll(".revela").forEach((el, i) => { el.style.transitionDelay = (i % 4) * 70 + "ms"; revelar.observe(el); });
   })();
 </script>
-<script src="/comun.js?v=2026-11-19d" defer></script>
+<script src="/comun.js?v=2026-11-19i" defer></script>
 </body>
 </html>
