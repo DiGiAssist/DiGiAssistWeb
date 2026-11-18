@@ -69,3 +69,11 @@
   // Cada clic a WhatsApp se anota con la página desde donde salió
   document.addEventListener("click", e => { const a = e.target.closest('a[href*="wa.me"]'); if (a && window.umami) umami.track("whatsapp", { pagina: location.pathname }); });
 })();
+
+(() => {
+  // Los puntitos se ven vivos arriba y se atenúan al bajar, para leer tranquilo
+  const raiz = document.documentElement, portada = document.querySelector(".portada");
+  if (!portada) return;
+  const marcar = () => raiz.classList.toggle("en-portada", scrollY < portada.offsetHeight * 0.55);
+  marcar(); addEventListener("scroll", marcar, { passive: true });
+})();
