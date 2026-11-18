@@ -18,19 +18,22 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/images/logo.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/images/icono-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/images/icono-192.png">
+<link rel="apple-touch-icon" href="/images/icono-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/estilo.css?v=2026-11-19a">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Service", "name": "Turnos online para consultorios en Córdoba", "description": "Agenda online por profesional, pago de la consulta con Mercado Pago y atención por chat y WhatsApp. Sistema de turnos para consultorios, hecho en Córdoba.", "provider": {"@type": "ProfessionalService", "name": "DiGiAssist", "url": "https://digiassist.com.ar/"}, "areaServed": {"@type": "AdministrativeArea", "name": "Córdoba, Argentina"}, "url": "https://digiassist.com.ar/turnos-online/"}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Sirve si somos varios profesionales?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Cada profesional tiene su propia agenda y puede cobrar con su propia cuenta de Mercado Pago."}}, {"@type": "Question", "name": "¿Los pacientes tienen que instalar una aplicación?", "acceptedAnswer": {"@type": "Answer", "text": "No. Reservan desde el celular o la computadora, o por el chat de la página. No hace falta instalar nada."}}, {"@type": "Question", "name": "¿Cuidan los datos de los pacientes?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Por ejemplo, en el Programa de Endometriosis el DNI de las pacientes se guarda cifrado. Revisamos con vos qué datos se piden y cuáles hacen falta."}}, {"@type": "Question", "name": "¿Cuánto tarda y cuánto cuesta?", "acceptedAnswer": {"@type": "Answer", "text": "Depende de cuántos profesionales y servicios tengas. Después de una charla de 30 minutos te pasamos un plazo y un presupuesto claros."}}]}]</script>
+<link rel="stylesheet" href="/estilo.css?v=2026-11-19d">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Service", "name": "Turnos online para consultorios en Córdoba", "description": "Agenda online por profesional, pago de la consulta con Mercado Pago y atención por chat y WhatsApp. Sistema de turnos para consultorios, hecho en Córdoba.", "provider": {"@type": "ProfessionalService", "name": "DiGiAssist", "url": "https://digiassist.com.ar/"}, "areaServed": {"@type": "AdministrativeArea", "name": "Córdoba, Argentina"}, "url": "https://digiassist.com.ar/turnos-online/"}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Sirve si somos varios profesionales?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Cada profesional tiene su propia agenda y puede cobrar con su propia cuenta de Mercado Pago."}}, {"@type": "Question", "name": "¿Los pacientes tienen que instalar una aplicación?", "acceptedAnswer": {"@type": "Answer", "text": "No. Reservan desde el celular o la computadora, o por el chat de la página. No hace falta instalar nada."}}, {"@type": "Question", "name": "¿Cuidan los datos de los pacientes?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Por ejemplo, en el Programa de Endometriosis el DNI de las pacientes se guarda cifrado. Revisamos con vos qué datos se piden y cuáles hacen falta."}}, {"@type": "Question", "name": "¿Cuánto tarda y cuánto cuesta?", "acceptedAnswer": {"@type": "Answer", "text": "Un sistema de turnos arranca desde USD 500 (no incluye el mantenimiento mensual) y el plazo depende de cuántos profesionales y servicios tengas. Después de una charla de 30 minutos te pasamos un precio y un plazo claros."}}]}]</script>
 </head>
 <body>
 <canvas class="puntos" id="puntos" aria-hidden="true"></canvas>
 
+<a class="saltar" href="#inicio">Saltar al contenido</a>
 <header class="cabecera">
   <div class="envoltura">
-    <a class="marca-sitio" href="/"><img src="/images/logo.png" alt="" width="26" height="34">DiGiAssist</a>
+    <a class="marca-sitio" href="/"><img src="/images/logo.webp" alt="" width="26" height="34">DiGiAssist</a>
     <nav class="menu" aria-label="Secciones">
       <a href="/#trabajos">Trabajos</a>
       <a href="/#servicios">Qué hacemos</a>
@@ -42,6 +45,7 @@
       <svg class="a-oscuro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
       <svg class="a-claro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
     </button>
+    <button class="menu-btn" type="button" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="menuMovil"><span></span><span></span><span></span></button>
     <a class="btn btn-lleno" href="#contacto"><span class="solo-grande">Contanos tu proyecto</span><span class="solo-chico">Contacto</span></a>
   </div>
 </header>
@@ -62,7 +66,7 @@
       <div class="vitrina" aria-label="Ejemplo real">
         <div class="navegador">
           <div class="navegador-barra"><i><b></b><b></b><b></b></i><span>draboninendometriosis.com</span></div>
-          <div class="pantallas"><img class="activa" src="/images/bonin-pc.webp" alt="Ejemplo de Programa de Endometriosis · Dra. Mónica Bonin" width="1200" height="750"></div>
+          <div class="pantallas"><img class="activa" fetchpriority="high" src="/images/bonin-pc.webp" alt="Ejemplo de Programa de Endometriosis · Dra. Mónica Bonin" width="1200" height="750"></div>
         </div>
         <div class="telefono"><div class="pantallas"><img class="activa" src="/images/bonin-movil.webp" alt="" width="420" height="909"></div></div>
       </div>
@@ -134,7 +138,7 @@
         <details><summary>¿Sirve si somos varios profesionales?</summary><p>Sí. Cada profesional tiene su propia agenda y puede cobrar con su propia cuenta de Mercado Pago.</p></details>
         <details><summary>¿Los pacientes tienen que instalar una aplicación?</summary><p>No. Reservan desde el celular o la computadora, o por el chat de la página. No hace falta instalar nada.</p></details>
         <details><summary>¿Cuidan los datos de los pacientes?</summary><p>Sí. Por ejemplo, en el Programa de Endometriosis el DNI de las pacientes se guarda cifrado. Revisamos con vos qué datos se piden y cuáles hacen falta.</p></details>
-        <details><summary>¿Cuánto tarda y cuánto cuesta?</summary><p>Depende de cuántos profesionales y servicios tengas. Después de una charla de 30 minutos te pasamos un plazo y un presupuesto claros.</p></details>
+        <details><summary>¿Cuánto tarda y cuánto cuesta?</summary><p>Un sistema de turnos arranca desde USD 500 (no incluye el mantenimiento mensual) y el plazo depende de cuántos profesionales y servicios tengas. Después de una charla de 30 minutos te pasamos un precio y un plazo claros.</p></details>
       </div>
     </div>
   </section>
@@ -186,6 +190,6 @@
     document.querySelectorAll(".revela").forEach((el, i) => { el.style.transitionDelay = (i % 4) * 70 + "ms"; revelar.observe(el); });
   })();
 </script>
-<script src="/comun.js?v=2026-11-19a" defer></script>
+<script src="/comun.js?v=2026-11-19d" defer></script>
 </body>
 </html>

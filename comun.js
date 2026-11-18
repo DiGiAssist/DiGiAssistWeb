@@ -77,3 +77,23 @@
   const marcar = () => raiz.classList.toggle("en-portada", scrollY < portada.offsetHeight * 0.55);
   marcar(); addEventListener("scroll", marcar, { passive: true });
 })();
+
+(() => {
+  // Menú de celular: se arma con los mismos enlaces en todas las páginas
+  const btn = document.getElementById("menuBtn"), cab = document.querySelector(".cabecera");
+  if (!btn || !cab) return;
+  const inicio = location.pathname === "/" || /\/index\.html$/.test(location.pathname), base = inicio ? "" : "/";
+  const nav = document.createElement("nav");
+  nav.className = "menu-movil"; nav.id = "menuMovil"; nav.hidden = true; nav.setAttribute("aria-label", "Menú");
+  const enlaces = [["Trabajos", base + "#trabajos"], ["Qué hacemos", base + "#servicios"], ["Paquetes", base + "#paquetes"], ["Productos", base + "#productos"], ["Cómo trabajamos", (inicio ? "" : "") + "#proceso"], ["Preguntas", "#preguntas"]];
+  const rubros = [["Tienda online", "/tienda-online/"], ["Sistema de ventas y stock", "/sistema-de-ventas-y-stock/"], ["Turnos online para consultorios", "/turnos-online/"]];
+  const a = (t, h, c) => `<a href="${h}"${c ? ` class="${c}"` : ""}>${t}</a>`;
+  nav.innerHTML = enlaces.map(([t, h]) => a(t, h)).join("") + `<span class="grupo">Por rubro</span>` + rubros.map(([t, h]) => a(t, h)).join("") + a("Contanos tu proyecto", "#contacto", "cta");
+  cab.appendChild(nav);
+  const cerrar = () => { nav.hidden = true; btn.setAttribute("aria-expanded", "false"); btn.setAttribute("aria-label", "Abrir menú"); };
+  btn.addEventListener("click", () => { const abrir = nav.hidden; nav.hidden = !abrir; btn.setAttribute("aria-expanded", String(abrir)); btn.setAttribute("aria-label", abrir ? "Cerrar menú" : "Abrir menú"); });
+  nav.addEventListener("click", e => { if (e.target.closest("a")) cerrar(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !nav.hidden) { cerrar(); btn.focus(); } });
+  document.addEventListener("click", e => { if (!nav.hidden && !e.target.closest(".cabecera")) cerrar(); });
+  matchMedia("(min-width: 1081px)").addEventListener("change", cerrar);
+})();
