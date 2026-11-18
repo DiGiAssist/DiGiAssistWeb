@@ -97,3 +97,28 @@
   document.addEventListener("click", e => { if (!nav.hidden && !e.target.closest(".cabecera")) cerrar(); });
   matchMedia("(min-width: 1081px)").addEventListener("change", cerrar);
 })();
+
+(() => {
+  // Cursor propio: un punto fuerte y un aro que lo sigue; el aro se agranda sobre lo que se puede tocar.
+  // Solo con mouse (no en pantallas táctiles). En campos de texto queda el cursor normal.
+  if (!matchMedia("(pointer: fine)").matches) return;
+  const raiz = document.documentElement, suave = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const punto = document.createElement("div"), aro = document.createElement("div");
+  punto.className = "cursor-punto"; aro.className = "cursor-aro"; punto.setAttribute("aria-hidden", "true"); aro.setAttribute("aria-hidden", "true");
+  document.body.append(aro, punto);
+  let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my, listo = false;
+  const tocable = "a, button, summary, label, select, input, textarea, [role='button'], .carrusel";
+  addEventListener("mousemove", e => {
+    mx = e.clientX; my = e.clientY;
+    if (!listo) { listo = true; rx = mx; ry = my; raiz.classList.add("con-cursor", "cursor-visible"); }
+    punto.style.transform = `translate(${mx}px, ${my}px)`;
+  }, { passive: true });
+  (function vuelta() {
+    rx += (mx - rx) * (suave ? 0.18 : 1); ry += (my - ry) * (suave ? 0.18 : 1);
+    aro.style.transform = `translate(${rx}px, ${ry}px)`;
+    requestAnimationFrame(vuelta);
+  })();
+  document.addEventListener("mouseover", e => { aro.classList.toggle("sobre", !!e.target.closest(tocable)); });
+  document.documentElement.addEventListener("mouseleave", () => raiz.classList.remove("cursor-visible"));
+  document.documentElement.addEventListener("mouseenter", () => { if (listo) raiz.classList.add("cursor-visible"); });
+})();
