@@ -641,3 +641,12 @@ html.en-portada .puntos { opacity: .9; }
 .vitrina .navegador-barra i b { width: max(6px, calc(9 * var(--p))); height: max(6px, calc(9 * var(--p))); }
 .vitrina .telefono { border-radius: calc(26 * var(--p)); padding: calc(7 * var(--p)); }
 .vitrina .telefono .pantallas { border-radius: calc(20 * var(--p)); }
+
+/* ---- cursor propio: punto con brillo y aro que lo sigue (solo con mouse) ---- */
+.cursor-punto, .cursor-aro { position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none; border-radius: 50%; opacity: 0; transition: opacity .2s, width .22s, height .22s, margin .22s, background .22s, border-color .22s; }
+.cursor-punto { width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; background: #0e4a55; box-shadow: 0 0 0 2px #fff, 0 0 0 3px rgba(6, 32, 35, .3), 0 0 16px var(--acento); }
+:root[data-theme="dark"] .cursor-punto { background: #3ee0b5; box-shadow: 0 0 0 2px #061b1f, 0 0 0 3px rgba(238, 246, 244, .35), 0 0 16px #3ee0b5; }
+.cursor-aro { width: 34px; height: 34px; margin: -17px 0 0 -17px; border: 1.5px solid color-mix(in srgb, var(--acento) 85%, transparent); }
+.cursor-aro.sobre { width: 56px; height: 56px; margin: -28px 0 0 -28px; background: color-mix(in srgb, var(--acento) 14%, transparent); border-color: var(--acento); }
+.cursor-visible .cursor-punto, .cursor-visible .cursor-aro { opacity: 1; }
+html.con-cursor, html.con-cursor *:not(input):not(textarea):not(select):not(option) { cursor: none !important; }
