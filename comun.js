@@ -64,7 +64,7 @@
 
 (() => {
   // Medición simple y sin cookies (Umami). Se activa pegando el "Website ID" del sitio en UMAMI_ID.
-  const UMAMI_ID = "";
+  const UMAMI_ID = "23cac111-36a6-4464-b20f-95da1c981744";
   if (UMAMI_ID) { const sc = document.createElement("script"); sc.defer = true; sc.src = "https://cloud.umami.is/script.js"; sc.dataset.websiteId = UMAMI_ID; document.head.appendChild(sc); }
   // Cada clic a WhatsApp se anota con la página desde donde salió
   document.addEventListener("click", e => { const a = e.target.closest('a[href*="wa.me"]'); if (a && window.umami) umami.track("whatsapp", { pagina: location.pathname }); });

@@ -616,3 +616,28 @@ html.en-portada .puntos { opacity: .9; }
 .opinion blockquote::before { content: "“"; display: block; font-size: 54px; line-height: .5; color: var(--acento-txt); margin-bottom: 6px; }
 .opinion figcaption { font-size: 14.5px; color: var(--tinta-2); }
 .opinion figcaption b { display: block; color: var(--tinta); font-weight: 700; }
+
+/* ---- portada: que entre completa en pantalla y que la vitrina se achique sin deformarse ---- */
+@media (min-width: 881px) {
+  .portada { padding-block: clamp(22px, 5.2vh, 80px) clamp(44px, 8vh, 100px); }
+  .portada-texto { gap: clamp(12px, 2.3vh, 26px); }
+  .portada h1 { font-size: clamp(34px, min(4.8vw, 6.4vh), 66px); }
+  .portada-texto > p { font-size: clamp(16px, min(1.8vw, 2.3vh), 21px); }
+  .cifras div { padding: clamp(10px, 1.9vh, 18px) 10px clamp(8px, 1.6vh, 16px); }
+  .cifras b { font-size: clamp(24px, 4vh, 34px); }
+}
+.vitrina { container-type: inline-size; padding: 5% 6.5% 13.5% 0; --p: min(1px, calc(100cqw / 486)); }
+.vitrina .aviso { font-size: max(8px, calc(13 * var(--p))); gap: calc(2 * var(--p)) calc(11 * var(--p)); padding: calc(11 * var(--p)) calc(15 * var(--p)) calc(11 * var(--p)) calc(11 * var(--p)); border-radius: calc(14 * var(--p)); max-width: calc(240 * var(--p)); }
+.vitrina .aviso i { width: calc(34 * var(--p)); height: calc(34 * var(--p)); border-radius: calc(10 * var(--p)); }
+.vitrina .aviso i svg { width: calc(18 * var(--p)); height: calc(18 * var(--p)); }
+.vitrina .aviso b { font-size: max(8.5px, calc(13.5 * var(--p))); }
+.vitrina .aviso small { font-size: max(7.5px, calc(12.5 * var(--p))); }
+.vitrina .aviso-1 { left: calc(-26 * var(--p)); top: 6%; }
+.vitrina .aviso-2 { right: 18%; top: -4%; }
+.vitrina .aviso-3 { left: 6%; bottom: 6%; }
+.vitrina .aviso-4 { right: calc(-6 * var(--p)); top: 34%; }
+.vitrina .navegador-barra { height: max(22px, calc(34 * var(--p))); }
+.vitrina .navegador-barra span { font-size: max(8px, calc(12 * var(--p))); }
+.vitrina .navegador-barra i b { width: max(6px, calc(9 * var(--p))); height: max(6px, calc(9 * var(--p))); }
+.vitrina .telefono { border-radius: calc(26 * var(--p)); padding: calc(7 * var(--p)); }
+.vitrina .telefono .pantallas { border-radius: calc(20 * var(--p)); }
