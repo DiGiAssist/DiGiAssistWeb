@@ -19,19 +19,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"DiGiAssist","url":"https://digiassist.com.ar/","image":"https://digiassist.com.ar/images/compartir.jpg","telephone":"+54 9 351 868-2206","email":"digiassistteam@gmail.com","description":"Páginas web, tiendas online, paneles de administración y asistentes de WhatsApp para negocios de Córdoba.","address":{"@type":"PostalAddress","addressLocality":"Villa Allende","addressRegion":"Córdoba","addressCountry":"AR"},"areaServed":"Argentina"}</script>
 <meta name="description" content="Páginas web, tiendas online, paneles de administración y atención por WhatsApp para negocios de Córdoba. Villa Allende, Córdoba.">
-<link rel="icon" href="images/logo.png">
+<link rel="icon" type="image/png" sizes="48x48" href="images/icono-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/icono-192.png">
+<link rel="apple-touch-icon" href="images/icono-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="estilo.css?v=2026-11-19a">
+<link rel="stylesheet" href="estilo.css?v=2026-11-19d">
 </head>
 <body>
+<a class="saltar" href="#inicio">Saltar al contenido</a>
 
 <canvas class="puntos" id="puntos" aria-hidden="true"></canvas>
 
 <header class="cabecera">
   <div class="envoltura">
-    <a class="marca-sitio" href="#inicio"><img src="images/logo.png" alt="" width="26" height="34">DiGiAssist</a>
+    <a class="marca-sitio" href="#inicio"><img src="images/logo.webp" alt="" width="26" height="34">DiGiAssist</a>
     <nav class="menu" aria-label="Secciones">
       <a href="#trabajos">Trabajos</a>
       <a href="#servicios">Qué hacemos</a>
@@ -44,6 +47,7 @@
       <svg class="a-oscuro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
       <svg class="a-claro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
     </button>
+    <button class="menu-btn" type="button" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="menuMovil"><span></span><span></span><span></span></button>
     <a class="btn btn-lleno" href="#contacto"><span class="solo-grande">Contanos tu proyecto</span><span class="solo-chico">Contacto</span></a>
   </div>
 </header>
@@ -54,7 +58,7 @@
       <div class="portada-texto">
         <span class="pildora"><i></i>Villa Allende · Córdoba</span>
         <h1 aria-label="Hacemos tu tienda online, tu panel de ventas, tu WhatsApp, tu página web y tus turnos online para que tu negocio venda más.">
-          <span aria-hidden="true">Hacemos <span class="rota" id="rota"><span>tu tienda online</span></span><br>para que tu negocio <em class="serif">venda&nbsp;más</em>.</span>
+          <span aria-hidden="true">Hacemos <span class="rota" id="rota"><span>tu tienda online</span></span>para que tu negocio <em class="serif">venda&nbsp;más</em>.</span>
         </h1>
         <p>Páginas, tiendas, paneles de ventas y stock, y asistentes de WhatsApp. Lo diseñamos a medida, lo programamos y lo dejamos andando.</p>
         <div class="acciones">
@@ -77,7 +81,7 @@
         <div class="navegador">
           <div class="navegador-barra"><i><b></b><b></b><b></b></i><span id="url">navara.com.ar</span></div>
           <div class="pantallas" id="pantallas">
-            <img class="activa" src="images/navara-pc.webp" alt="Tienda online de NAVARA" width="1200" height="750" data-url="navara.com.ar">
+            <img class="activa" fetchpriority="high" src="images/navara-pc.webp" alt="Tienda online de NAVARA" width="1200" height="750" data-url="navara.com.ar">
             <img src="images/korva-pc.webp" alt="Tienda online de KORVA" width="1200" height="750" data-url="korvastore.com.ar">
             <img src="images/dga-store.webp" alt="Panel de ventas y stock de TecnoGlobal" width="1200" height="674" data-url="panel · TecnoGlobal">
           </div>
@@ -202,7 +206,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8"/></svg>
           <h3>Páginas y tiendas online</h3>
           <p>Tu marca en internet, pensada primero para el celular.</p>
-          <ul><li>Catálogo y carrito</li><li>Pagos con Mercado Pago</li><li>Dominio y hosting</li></ul>
+          <ul><li>Catálogo y carrito</li><li>Pagos con Mercado Pago</li><li>Envíos con Correo Argentino</li></ul>
         </div>
         <div class="servicio revela">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
@@ -235,15 +239,15 @@
       <div class="seccion-cab revela">
         <span class="rotulo">Paquetes</span>
         <h2>Elegí por dónde <em>arrancar</em>.</h2>
-        <p>Tres formas de trabajar. El precio lo definimos después de una charla de 30 minutos, según lo que necesites.</p>
+        <p>Tres formas de trabajar. Los precios son "desde": el valor final depende de lo que necesites y lo definimos después de una charla de 30 minutos.</p>
       </div>
       <div class="paquetes">
         <article class="paquete revela">
           <span class="rotulo">Para presentarte</span>
           <h3>Página web</h3>
           <p>Tu negocio en internet, con una página clara, rápida y pensada primero para el celular.</p>
-          <ul><li>Diseño propio con tu marca</li><li>Botón de WhatsApp y formulario de contacto</li><li>Dominio y hosting</li><li>Lista para aparecer en Google</li></ul>
-          <div class="precio">Presupuesto a medida</div>
+          <ul><li>Diseño propio con tu marca</li><li>Botón de WhatsApp y formulario de contacto</li><li>Se ve bien en celular y computadora</li><li>Lista para aparecer en Google</li></ul>
+          <div class="precio"><span>Desde</span> <b>USD 100</b></div>
           <a class="btn btn-linea" href="https://wa.me/5493518682206?text=Hola!%20Me%20interesa%20una%20p%C3%A1gina%20web.%20%C2%BFPodemos%20hablar%3F" target="_blank" rel="noopener">Quiero mi página</a>
           <a class="mas" href="#trabajos">Ver trabajos →</a>
         </article>
@@ -252,7 +256,7 @@
           <h3>Tienda online</h3>
           <p>Catálogo, carrito y cobro, con un panel para que manejes todo vos.</p>
           <ul><li>Catálogo por colecciones y carrito</li><li>Pagos con Mercado Pago</li><li>Envíos con Correo Argentino</li><li>Panel para cargar productos y ver pedidos</li></ul>
-          <div class="precio">Presupuesto a medida</div>
+          <div class="precio"><span>Desde</span> <b>USD 300</b></div>
           <a class="btn btn-lleno" href="https://wa.me/5493518682206?text=Hola!%20Me%20interesa%20una%20tienda%20online.%20%C2%BFPodemos%20hablar%3F" target="_blank" rel="noopener">Quiero mi tienda</a>
           <a class="mas" href="/tienda-online/">Ver cómo es →</a>
         </article>
@@ -261,12 +265,12 @@
           <h3>Sistema a medida</h3>
           <p>Ventas, stock, turnos o lo que tu negocio maneje hoy a mano.</p>
           <ul><li>Ventas, remitos y stock, o turnos y reservas</li><li>Usuarios y permisos</li><li>Reportes del día, la semana y el mes</li><li>Se entra desde cualquier dispositivo</li></ul>
-          <div class="precio">Presupuesto a medida</div>
+          <div class="precio"><span>Desde</span> <b>USD 500</b></div>
           <a class="btn btn-linea" href="https://wa.me/5493518682206?text=Hola!%20Me%20interesa%20un%20sistema%20a%20medida.%20%C2%BFPodemos%20hablar%3F" target="_blank" rel="noopener">Quiero mi sistema</a>
           <a class="mas" href="/sistema-de-ventas-y-stock/">Ver cómo es →</a>
         </article>
       </div>
-      <p class="paquetes-nota">Los tres se pueden sumar a un <b>mantenimiento mensual</b> opcional. Lo vemos en la charla.</p>
+      <p class="paquetes-nota">Precios en dólares. <b>No incluyen el mantenimiento mensual</b> (hosting, cambios y soporte), que se acuerda aparte.</p>
     </div>
   </section>
 
@@ -358,8 +362,8 @@
         <div class="cinta">
           <div class="cinta-pista">
             <div class="cinta-grupo">
-              <a class="logo-cliente logo-navara" href="https://navara.com.ar/" target="_blank" rel="noopener"><span class="silueta" role="img" aria-label="NAVARA"></span></a>
-              <a class="logo-cliente logo-korva" href="https://korvastore.com.ar/" target="_blank" rel="noopener"><span class="silueta" role="img" aria-label="KORVA"></span></a>
+              <a class="logo-cliente logo-navara" href="https://navara.com.ar/" target="_blank" rel="noopener" aria-label="NAVARA"><span class="silueta" role="img" aria-label="NAVARA"></span></a>
+              <a class="logo-cliente logo-korva" href="https://korvastore.com.ar/" target="_blank" rel="noopener" aria-label="KORVA"><span class="silueta" role="img" aria-label="KORVA"></span></a>
               <a class="logo-cliente logo-bonin" href="https://draboninendometriosis.com/" target="_blank" rel="noopener">
                 <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" stroke-width="3.2"/><path d="M20 12v16M12 20h16" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"/></svg>
                 <span>Programa de Endometriosis<small>Dra. Mónica Bonin · Córdoba</small></span>
@@ -512,7 +516,7 @@
     car.addEventListener("focusout", () => encima = false);
   })();
 </script>
-<script src="comun.js?v=2026-11-19a" defer></script>
+<script src="comun.js?v=2026-11-19d" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js"></script>
 <script>
   // Formulario: manda la consulta por EmailJS (la misma cuenta que usaba el sitio anterior)

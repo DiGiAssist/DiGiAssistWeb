@@ -86,7 +86,7 @@
   .tema-btn .a-claro { display: none; }
   :root[data-theme="dark"] .tema-btn .a-oscuro { display: none; }
   :root[data-theme="dark"] .tema-btn .a-claro { display: block; }
-  @media (max-width: 880px) { .menu { display: none; } .tema-btn { margin-left: auto; } }
+  @media (max-width: 1080px) { .menu { display: none; } .tema-btn { margin-left: auto; } }
   @media (max-width: 520px) { .solo-grande { display: none; } .solo-chico { display: inline; } }
 
   /* portada: clara por defecto (oscura en modo oscuro), frase que rota, vitrina viva con capturas que cambian y avisos que aparecen */
@@ -101,7 +101,7 @@
   .pildora i { width: 8px; height: 8px; border-radius: 50%; background: #3ee0b5; box-shadow: 0 0 0 0 rgba(62, 224, 181, .6); animation: latido 2s infinite; }
   @keyframes latido { 70% { box-shadow: 0 0 0 9px rgba(62, 224, 181, 0); } 100% { box-shadow: 0 0 0 0 rgba(62, 224, 181, 0); } }
   .portada h1 { font-size: clamp(38px, 4.8vw, 66px); font-weight: 800; letter-spacing: -.04em; line-height: 1.02; }
-  .rota { position: relative; display: inline-block; vertical-align: bottom; color: var(--acento-txt); font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.16em; letter-spacing: -.015em; line-height: .96; }
+  .rota { position: relative; display: block; width: fit-content; max-width: 100%; color: var(--acento-txt); font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.16em; letter-spacing: -.015em; line-height: .96; }
   .rota span { display: inline-block; white-space: nowrap; }
   @media (max-width: 420px) { .rota span { white-space: normal; } }
   .rota.sale span { animation: salir .35s cubic-bezier(.6, 0, .8, .4) forwards; }
@@ -461,7 +461,7 @@
 .paquete .mas { text-align: center; font-weight: 600; font-size: 15px; color: var(--marca); text-decoration: none; padding-block: 6px; }
 .paquete .mas:hover { text-decoration: underline; }
 .paquetes-nota { margin-top: 26px; color: var(--tinta-2); text-align: center; }
-@media (max-width: 960px) { .paquetes { grid-template-columns: 1fr; } .paquete h3 { font-size: 24px; } }
+@media (max-width: 960px) { .paquetes { gap: 14px; } .paquete { padding: 22px 18px; } .paquete h3 { font-size: 22px; } }
 @media (max-width: 520px) { .garantias { font-size: 13.5px; gap: 6px 16px; } .rubros a { font-size: 14px; } }
 
 /* ---- páginas por rubro ---- */
@@ -536,3 +536,83 @@ html.en-portada .puntos { opacity: .9; }
   .carrusel .trabajo p:not(.resuelve) { -webkit-line-clamp: 2; font-size: 14px; }
   .trabajo .resuelve { font-size: 13px; }
 }
+
+/* menú y botón del encabezado: nunca se parten en dos renglones */
+.menu a, .cabecera .btn, .marca-sitio { white-space: nowrap; }
+
+/* paquetes en el celular: los tres uno al lado del otro, compactos */
+@media (max-width: 700px) {
+  .paquetes { gap: 7px; margin-top: 24px; }
+  .paquete { gap: 9px; padding: 12px 8px 12px; border-radius: 12px; }
+  .paquete:hover { transform: none; }
+  .paquete .rotulo { font-size: 8.5px; letter-spacing: .03em; }
+  .paquete h3 { font-size: 15px; line-height: 1.1; }
+  .paquete > p { display: none; }
+  .paquete ul { gap: 6px; font-size: 10.5px; line-height: 1.3; }
+  .paquete li { padding-left: 12px; }
+  .paquete li::before { top: .3em; width: 8px; height: 8px; box-shadow: inset 0 0 0 2.5px var(--marca); }
+  .paquete .precio { padding-top: 8px; font-size: 9px; }
+  .paquete .btn { min-height: 34px; padding: 6px 4px; font-size: 10.5px; line-height: 1.2; text-align: center; }
+  .paquete .mas { font-size: 10px; padding-block: 2px; }
+  .paquetes-nota { font-size: 13px; margin-top: 16px; }
+}
+
+/* productos en pantallas chicas: más aire entre los bloques */
+@media (max-width: 860px) {
+  .producto { gap: 28px; padding-block: 20px; }
+  .producto-texto { gap: 18px; }
+  .producto ul { gap: 12px 26px; font-size: 15px; margin-block: 4px; }
+  .producto li { line-height: 1.35; }
+  .producto + .producto { margin-top: 34px; padding-top: 52px; }
+}
+@media (max-width: 560px) { .producto ul { grid-template-columns: 1fr; gap: 11px; } }
+
+/* ---- menú de celular, accesibilidad y toques más cómodos ---- */
+.saltar { position: absolute; left: 12px; top: -60px; z-index: 30; padding: 10px 16px; border-radius: 10px; background: var(--marca-fuerte); color: #fff; font-weight: 600; text-decoration: none; transition: top .2s; }
+.saltar:focus { top: 10px; }
+.menu-btn { display: none; flex: none; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--linea); background: var(--superficie); cursor: pointer; padding: 0; place-content: center; gap: 4px; }
+.menu-btn span { display: block; width: 17px; height: 2px; border-radius: 2px; background: var(--tinta); transition: transform .25s, opacity .2s; }
+.menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.menu-movil { position: absolute; top: 100%; left: 0; right: 0; z-index: 8; display: grid; padding: 8px max(20px, env(safe-area-inset-left, 0px)) 22px; background: var(--fondo); border-bottom: 1px solid var(--linea); box-shadow: var(--sombra); max-height: calc(100vh - 70px); overflow-y: auto; }
+.menu-movil[hidden] { display: none; }
+.menu-movil a { display: flex; align-items: center; min-height: 48px; font-size: 18px; font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--linea); }
+.menu-movil .grupo { margin: 16px 0 2px; font: 500 12px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--tinta-2); }
+.menu-movil a.cta { margin-top: 16px; justify-content: center; border: 0; border-radius: 999px; background: var(--marca); color: var(--sobre-marca); font-weight: 700; }
+@media (max-width: 1080px) { .menu-btn { display: grid; } }
+@media (min-width: 1081px) { .menu-movil { display: none !important; } }
+@media (max-width: 520px) { .cabecera .btn { display: none; } .tema-btn { margin-left: auto; } .menu-btn { margin-left: 0; } }
+.marca-sitio { padding-block: 8px; }
+@media (max-width: 700px) {
+  .paquete .mas, .asistente a, .canales a, .formulario.siguiente .mas { display: inline-flex; align-items: center; min-height: 44px; }
+  .trabajo-cuerpo .rotulo a { display: inline-flex; align-items: center; min-height: 40px; }
+}
+/* celular: servicios y pasos en dos columnas, compactos */
+@media (max-width: 560px) {
+  .servicios { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .servicio, .servicio + .servicio { padding: 18px 10px 14px 0; border-left: 0; border-top: 0; margin-top: 0; }
+  .servicio:nth-child(even) { padding-left: 12px; padding-right: 0; border-left: 1px solid var(--linea); }
+  .servicio:nth-child(n+3) { border-top: 1px solid var(--linea); }
+  .servicio svg { width: 38px; height: 38px; padding: 9px; border-radius: 11px; }
+  .servicio h3 { font-size: 16px; line-height: 1.15; }
+  .servicio p { font-size: 13px; line-height: 1.4; }
+  .servicio ul { font-size: 12.5px; gap: 4px; }
+  .pasos { grid-template-columns: 1fr 1fr; gap: 10px; row-gap: 10px; }
+  .paso { padding: 14px 12px 16px; gap: 5px; }
+  .paso::before { font-size: 30px; }
+  .paso h3 { font-size: 15.5px; }
+  .paso p { font-size: 12.5px; line-height: 1.4; }
+}
+
+.paquete .precio { display: flex; align-items: baseline; gap: 8px; }
+.paquete .precio span { font: 500 12.5px/1 var(--mono); color: var(--tinta-2); text-transform: uppercase; letter-spacing: .05em; }
+.paquete .precio b { font: 800 26px/1 var(--display); letter-spacing: -.02em; color: var(--tinta); }
+@media (max-width: 700px) { .paquete .precio { flex-direction: column; align-items: flex-start; gap: 3px; } .paquete .precio span { font-size: 8.5px; } .paquete .precio b { font-size: 15px; } }
+/* opiniones de clientes (se usan cuando haya frases autorizadas) */
+.opiniones { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 32px; }
+.opinion { margin: 0; padding: 26px 26px 22px; border-radius: 20px; background: var(--superficie); border: 1px solid var(--linea); display: grid; gap: 16px; }
+.opinion blockquote { margin: 0; font: italic 400 24px/1.25 var(--serif); letter-spacing: -.01em; }
+.opinion blockquote::before { content: "“"; display: block; font-size: 54px; line-height: .5; color: var(--acento-txt); margin-bottom: 6px; }
+.opinion figcaption { font-size: 14.5px; color: var(--tinta-2); }
+.opinion figcaption b { display: block; color: var(--tinta); font-weight: 700; }
